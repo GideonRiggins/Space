@@ -3,286 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space | Quantum Flight Deck</title>
+    <title>Gideon Riggins | Professional Portfolio</title>
+    <!-- High-Fidelity Tailwind Framework Layer -->
+    <script src="https://tailwindcss.com"></script>
     <style>
-        /* Cockpit Base System Geometry & Reset Restraints */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body {
-            background-color: #010206;
-            color: #f1f5f9;
-            font-family: monospace;
-            position: relative;
-            min-height: 100vh;
-            overflow: hidden;
-            user-select: none;
-        }
-
-        #starfield {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            cursor: crosshair;
-        }
-
-        /* Ambient Cosmic Energy Layers */
-        .nebula {
-            position: fixed;
-            width: 650px;
-            height: 650px;
-            border-radius: 50%;
-            filter: blur(160px);
-            z-index: 2;
-            opacity: 0.12;
-            pointer-events: none;
-            transition: opacity 0.8s, background 0.8s;
-        }
-        .purple { top: -10%; left: -10%; background: #5b21b6; }
-        .cyan { bottom: -10%; right: -10%; background: #0891b2; }
-
-        /* CRT Terminal Monitor Grid Texture */
-        .hud-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 3;
-            background: linear-gradient(rgba(15, 23, 42, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(15, 23, 42, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-            background-size: 4px 4px;
-            pointer-events: none;
-            opacity: 0.35;
-        }
-
-        .interface-grid {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2.5rem 1.5rem;
-            height: 100vh;
-            justify-content: space-between;
-            pointer-events: none; /* Mouse clicks pass directly to flight canvas */
-        }
-
-        header {
-            width: 100%;
-            max-w: 1100px;
-            display: flex;
-            justify-content: space-between;
-            color: #223147;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-        .live-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: #06b6d4;
-            border-radius: 50%;
-            margin-right: 6px;
-            box-shadow: 0 0 8px #06b6d4;
-            transition: background-color 0.3s;
-        }
-
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-            max-w: 800px;
-            text-align: center;
-        }
-
-        /* High-Impact Flight Deck Branding Labels */
-        h1 {
-            font-size: clamp(2.2rem, 6vw, 4rem);
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #ffffff;
-            text-transform: uppercase;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 0.5s ease;
-        }
-        h1 span {
-            color: #06b6d4;
-            text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
-            transition: color 0.4s, text-shadow 0.4s;
-        }
-
-        .telemetry-alert {
-            color: #334155;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 0.5rem;
-        }
-
-        footer {
-            width: 100%;
-            max-w: 1100px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.65rem;
-            color: #1e293b;
-            letter-spacing: 1.5px;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 antialiased">
 
-    <!-- Quantum Vector Canvas Backplane -->
-    <canvas id="starfield"></canvas>
-    <div id="neb-p" class="nebula purple"></div>
-    <div id="neb-c" class="nebula cyan"></div>
-    <div class="hud-overlay"></div>
+    <!-- Global Navigation Header bar -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="font-bold text-slate-900 tracking-tight text-lg">Gideon Riggins</div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
+                <a href="#services" class="hover:text-blue-600 transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-blue-600 transition-colors">Portfolio</a>
+                <a href="#contact" class="bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors">Get In Touch</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="interface-grid">
-        <header>
-            <div>GIDEON RIGGINS</div>
-            <div><span class="live-dot" id="status-dot"></span><span id="status-text">ENGINES.STANDBY</span></div>
-        </header>
+    <!-- Main Hero Presentation Deck -->
+    <section id="about" class="py-24 bg-white border-b border-slate-100">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+                Building Clean, Modern, and Practical Web Applications
+            </h1>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto mb-8 leading-relaxed font-light">
+                Hi, I'm Gideon. I specialize in crafting ultra-fast, user-friendly frontend experiences using clean architecture and modern engineering standards.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#portfolio" class="px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-all shadow-sm">View My Work</a>
+                <a href="#services" class="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all">Learn More</a>
+            </div>
+        </div>
+    </section>
 
-        <main>
-            <h1 id="main-title">QUANTUM<span>.LAUNCHER</span></h1>
-            <div class="telemetry-alert" id="instruction-prompt">HOLD MOUSE TO INJECT QUANTUM OVERDRIVE</div>
-        </main>
+    <!-- Core Services Capabilities Cards Grid -->
+    <section id="services" class="py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Core Services</h2>
+                <p class="mt-2 text-sm text-slate-500">Professional solutions engineered for high performance.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+                    <div class="text-2xl mb-4">window</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Frontend Engineering</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Developing lightning-fast user interfaces using optimized JavaScript architectures and pristine stylesheets.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+                    <div class="text-2xl mb-4">settings</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Automation & Tools</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Streamlining continuous deployment models and data parsing scripts to maintain zero-downtime platforms.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+                    <div class="text-2xl mb-4">phone</div>
+                    <h3 class="font-bold text-slate-900 mb-2">Responsive Design</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Creating clean fluid layouts built to scale dynamically across mobile screens, tablets, and desktop monitors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <footer>
-            <div>THRUST MATRIX: RESPONSIVE</div>
-            <div>SYS_DECK_V3</div>
-        </footer>
-    </div>
+    <!-- Production Project Registry Modules -->
+    <section id="portfolio" class="py-24 bg-white border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Featured Projects</h2>
+                <p class="mt-2 text-sm text-slate-500">A look inside my live open-source engineering modules.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="group bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all hover:border-slate-300">
+                    <div class="p-8">
+                        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Web App</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">The Space Telemetry Portal</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">A clean, high-performance static repository index configured and hosted right here on GitHub Pages.</p>
+                        <a href="https://github.com" target="_blank" class="text-slate-900 text-sm font-semibold inline-flex items-center gap-1 group-hover:text-blue-600 transition-colors">
+                            View Codebase Source &rarr;
+                        </a>
+                    </div>
+                </div>
+                <div class="group bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all hover:border-slate-300">
+                    <div class="p-8">
+                        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Systems Optimization</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">CI/CD Automated Deployment</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Configuring automated workflow pipelines to test, compile, and distribute layout updates securely on every branch sync.</p>
+                        <a href="https://github.com/actions" target="_blank" class="text-slate-900 text-sm font-semibold inline-flex items-center gap-1 group-hover:text-blue-600 transition-colors">
+                            View Action Runner Logs &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- High-Velocity Matrix Physics Engine Script -->
-    <script>
-        const canvas = document.getElementById('starfield');
-        const ctx = canvas.getContext('2d');
-        
-        let stars = [];
-        const numStars = 350; // Increased star matrix capacity for extreme density depth
-        
-        let isWarping = false;
-        let warpFactor = 1;
-        let targetWarpFactor = 1;
-        
-        // Flight vector coordinate positions tracking
-        let mouse = { x: 0, y: 0, currentX: 0, currentY: 0 };
+    <!-- Communication Broadcast Form Network node -->
+    <section id="contact" class="py-24 bg-slate-50">
+        <div class="max-w-md mx-auto px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Get In Touch</h2>
+                <p class="mt-2 text-sm text-slate-500">Have an opportunity or question? Send a direct message.</p>
+            </div>
+            <form action="https://formspree.io" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Full Name</label>
+                    <input type="text" name="name" class="w-full border border-slate-200 p-3 rounded-lg text-sm bg-white outline-none focus:border-slate-400" placeholder="Jane Doe" required>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Email Address</label>
+                    <input type="email" name="email" class="w-full border border-slate-200 p-3 rounded-lg text-sm bg-white outline-none focus:border-slate-400" placeholder="jane@example.com" required>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Message</label>
+                    <textarea name="message" rows="4" class="w-full border border-slate-200 p-3 rounded-lg text-sm bg-white outline-none focus:border-slate-400 resize-none" placeholder="Describe your goals or project parameters..." required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-slate-900 text-white font-medium p-3 rounded-lg text-sm hover:bg-slate-800 transition-colors shadow-sm">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+    <!-- Global Layout Footer -->
+    <footer class="bg-white border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-medium">
+            <p>&copy; 2026 Gideon Riggins. All rights reserved.</p>
+            <div class="flex gap-6 mt-4 sm:mt-0">
+                <a href="https://github.com" target="_blank" class="hover:text-slate-600 transition-colors">GitHub Repository</a>
+            </div>
+        </div>
+    </footer>
 
-        // Populate Coordinate Field relative to dynamic scaling boundaries
-        for (let i = 0; i < numStars; i++) {
-            stars.push({
-                x: (Math.random() - 0.5) * 3000,
-                y: (Math.random() - 0.5) * 3000,
-                z: Math.random() * 2000,
-                size: Math.random() * 1.5 + 0.5
-            });
-        }
-
-        // Steerable Horizon Coordinate Tracking
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX - window.innerWidth / 2;
-            mouse.y = e.clientY - window.innerHeight / 2;
-        });
-
-        // Trigger Extreme Velocity on Hold Click
-        window.addEventListener('mousedown', () => {
-            isWarping = true;
-            targetWarpFactor = 45; // Enhanced maximum terminal speed cap
-            document.getElementById('status-text').innerText = "OVERDRIVE.ACTIVE";
-            document.getElementById('status-text').style.color = "#f43f5e";
-            document.getElementById('status-dot').style.backgroundColor = "#f43f5e"; // Red alert critical speed signal
-            document.getElementById('status-dot').style.boxShadow = "0 0 15px #f43f5e";
-            document.getElementById('instruction-prompt').innerText = "DISENGAGE BUTTON TO STABILIZE MATRIX";
-            document.getElementById('instruction-prompt').style.color = "#f43f5e";
-            
-            document.getElementById('main-title').style.transform = "scale(0.96)";
-            document.getElementById('main-title').style.letterSpacing = "8px";
-        });
-
-        window.addEventListener('mouseup', () => {
-            isWarping = false;
-            targetWarpFactor = 1;
-            document.getElementById('status-text').innerText = "ENGINES.STANDBY";
-            document.getElementById('status-text').style.color = "#94a3b8";
-            document.getElementById('status-dot').style.backgroundColor = "#06b6d4";
-            document.getElementById('status-dot').style.boxShadow = "0 0 8px #06b6d4";
-            document.getElementById('instruction-prompt').innerText = "HOLD MOUSE TO INJECT QUANTUM OVERDRIVE";
-            document.getElementById('instruction-prompt').style.color = "#334155";
-            
-            document.getElementById('main-title').style.transform = "scale(1)";
-            document.getElementById('main-title').style.letterSpacing = "2px";
-        });
-
-        function animate() {
-            // Slower background wipe context creates a long, elegant fading particle trail matrix
-            ctx.fillStyle = `rgba(1, 2, 6, ${isWarping ? 0.08 : 0.35})`;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Interpolate dynamic speed variables smoothly
-            warpFactor += (targetWarpFactor - warpFactor) * 0.04;
-
-            // Interpolate steerable mouse vector positions smoothly (magnetic delay loop)
-            mouse.currentX += (mouse.x - mouse.currentX) * 0.05;
-            mouse.currentY += (mouse.y - mouse.currentY) * 0.05;
-
-            // Translate grid canvas framework relative to center point origin
-            ctx.save();
-            ctx.translate(canvas.width / 2, canvas.height / 2);
-
-            stars.forEach(star => {
-                // Pull coordinate depth forward relative to speed multiplayers
-                star.z -= warpFactor;
-
-                // Infinite loop grid recycle markers
-                if (star.z <= 0) {
-                    star.z = 2000;
-                    star.x = (Math.random() - 0.5) * 3000;
-                    star.y = (Math.random() - 0.5) * 3000;
-                }
-
-                // 3D Viewport Horizon Offset Matrix calculations (Incorporates steerable mouse controls)
-                let px = ((star.x - mouse.currentX * 0.3) / star.z) * (canvas.width * 0.8);
-                let py = ((star.y - mouse.currentY * 0.3) / star.z) * (canvas.height * 0.8);
-
-                // Tracking back-reference position arrays to drop fading tail vectors
-                let prevZ = star.z + warpFactor * (isWarping ? 1.8 : 1.2);
-                let p_px = ((star.x - mouse.currentX * 0.3) / prevZ) * (canvas.width * 0.8);
-                let p_py = ((star.y - mouse.currentY * 0.3) / prevZ) * (canvas.height * 0.8);
-
-                ctx.beginPath();
-                if (isWarping) {
-                    // Extreme Velocity Electric Cyan Rays
-                    ctx.strokeStyle = `rgba(6, 182, 212, ${Math.min(1, 1 - star.z / 2000)})`;
-                    ctx.lineWidth = star.size * (1 - star.z / 2000) * 2;
-                    ctx.moveTo(px, py);
-                    ctx.lineTo(p_px, p_py);
-                    ctx.stroke();
-                } else {
-                    // Ambient Point Stars
-                    ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, 1 - star.z / 2000)})`;
-                    ctx.arc(px, py, star.size * (1 - star.z / 2000), 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
-
-            // 🎯 DRAW FLOATING VECTOR HUD TARGET CROSSHAIR IN CENTER
-            ctx.beginPath();
-            ctx.strokeStyle = isWarping ? "rgba(244, 63, 94, 0.4)" : "rgba(6, 182, 212, 0.25)";
-            ctx.lineWidth = 1;
-            // Draw crosshair ring tracking cursor movements smoothly
-            ctx.arc(mouse.currentX * 0.08, mouse.currentY * 0.08, isWarping ? 40 : 25, 0, Math.PI * 2);
-            ctx.stroke();
-
-            ctx.restore();
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
 </body>
 </html>
