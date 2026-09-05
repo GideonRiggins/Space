@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space | Mainframe Search Engine</title>
+    <title>Space | Command Deck</title>
     <style>
-        /* Base Setup & Premium Minimalist Presentation Layer */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
             background-color: #03050c;
@@ -13,6 +12,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             position: relative;
             min-height: 100vh;
+            overflow: hidden;
         }
 
         #starfield {
@@ -22,7 +22,6 @@
             pointer-events: none;
         }
 
-        /* Ambient Low-Opacity Space Nebula Overlays */
         .nebula {
             position: fixed;
             width: 500px;
@@ -57,13 +56,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2.5rem 1.5rem;
-            min-height: 100vh;
+            padding: 3rem 1.5rem;
+            height: 100vh;
+            justify-content: space-between;
         }
 
         header {
             width: 100%;
-            max-w: 1000px;
+            max-width: 1100px;
             display: flex;
             justify-content: space-between;
             font-family: monospace;
@@ -71,16 +71,18 @@
             letter-spacing: 4px;
             color: #334155;
             text-transform: uppercase;
-            margin-bottom: 4rem;
         }
 
         main {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            gap: 2rem;
             width: 100%;
-            max-w: 750px;
-            margin-bottom: auto;
+            max-width: 650px;
+            margin: auto;
+            text-align: center;
         }
 
         h1 {
@@ -91,7 +93,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            margin-bottom: 2rem;
         }
         h1 span {
             background: linear-gradient(to right, #06b6d4, #6366f1);
@@ -99,55 +100,44 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* 🚀 STYLING GOOGLE'S OFFICIAL EMBEDDED SEARCH ELEMENT */
-        .gcse-search-container {
+        /* Sleek Glowing Search Bar Form */
+        .search-form {
             width: 100%;
-            background: rgba(10, 15, 28, 0.5);
-            border: 1px solid rgba(51, 65, 85, 0.4);
+            position: relative;
+        }
+        .search-bar {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+            padding: 1.2rem 1.5rem;
+            padding-left: 3.2rem;
             border-radius: 16px;
-            padding: 1.5rem;
+            color: #f8fafc;
+            font-size: 1.05rem;
+            outline: none;
             backdrop-filter: blur(12px);
-            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+            font-family: monospace;
         }
-
-        /* Overriding Google's default interface styles to match your theme */
-        .gsc-control-cse {
-            background-color: transparent !important;
-            border: none !important;
-            padding: 0 !important;
+        .search-bar:focus {
+            border-color: #06b6d4;
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.2);
         }
-        .gsc-input-box {
-            background: rgba(15, 23, 42, 0.6) !important;
-            border: 1px solid rgba(51, 65, 85, 0.6) !important;
-            border-radius: 8px !important;
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #06b6d4;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
         }
-        input.gsc-input {
-            color: #ffffff !important;
-            background: transparent !important;
-            font-family: monospace !important;
-        }
-        .gsc-search-button-v2 {
-            background-color: #06b6d4 !important;
-            border: none !important;
-            border-radius: 8px !important;
-        }
-        .gsc-search-button-v2:hover {
-            background-color: #6366f1 !important;
-        }
-        .gsc-results-wrapper-visible {
-            background: rgba(4, 6, 14, 0.95) !important;
-            border: 1px solid rgba(51, 65, 85, 0.3) !important;
-            border-radius: 12px !important;
-            margin-top: 1.5rem !important;
-            padding: 1.5rem !important;
-        }
-        .gs-title, .gs-title b { color: #06b6d4 !important; text-decoration: none !important; }
-        .gs-snippet { color: #94a3b8 !important; }
-        .gsc-webResult { border-bottom: 1px solid rgba(51, 65, 85, 0.2) !important; padding: 10px 0 !important; }
 
         footer {
             width: 100%;
-            max-w: 1000px;
+            max-width: 1100px;
             display: flex;
             justify-content: space-between;
             font-family: monospace;
@@ -155,17 +145,10 @@
             color: #1e293b;
             border-top: 1px solid rgba(51, 65, 85, 0.1);
             padding-top: 1.5rem;
-            margin-top: 2rem;
         }
-        footer a { color: #1e293b; text-decoration: none; }
     </style>
-    
-    <!-- 🚀 LOADING GOOGLE'S OFFICIAL PROGRAMMABLE SEARCH API SYSTEM LINK -->
-    <script async src="https://google.com"></script>
 </head>
 <body>
-
-    <!-- Ambient Visual Background Animation Canvas -->
     <canvas id="starfield"></canvas>
     <div class="nebula purple"></div>
     <div class="nebula cyan"></div>
@@ -174,25 +157,27 @@
     <div class="interface-grid">
         <header>
             <div>Space Mainframe</div>
-            <div style="color: #475569;">Google Engine Core</div>
+            <div style="color: #475569;">System Optimal</div>
         </header>
 
         <main>
             <h1>Space<span>.Search</span></h1>
             
-            <!-- 🚀 GOOGLE'S ZERO-REDIRECT INTERNAL INJECTION COMPONENT -->
-            <div class="gcse-search-container">
-                <div class="gcse-search" data-gprogresults="true"></div>
-            </div>
+            <!-- Clean form that routes directly to DuckDuckGo securely -->
+            <form action="https://duckduckgo.com" method="GET" target="_blank" class="search-form">
+                <svg class="search-icon" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" name="q" class="search-bar" placeholder="Search DuckDuckGo..." autocomplete="off" autofocus>
+            </form>
         </main>
 
         <footer>
             <div>&copy; 2026 GIDEON RIGGINS.</div>
-            <div><a href="https://github.com" target="_blank">MAIN_NODE.SRC</a></div>
+            <div>STATUS: STABLE</div>
         </footer>
     </div>
 
-    <!-- Active Mouse-Tracking Star Field Loop Logic Script -->
     <script>
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
