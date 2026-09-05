@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Search Engine</title>
+    <title>Gideon Riggins | Search Node</title>
     <style>
-        /* Base Configuration & Premium Presentation Layer */
+        /* Base Framework Configuration & Reset Layers */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
             background-color: #03050c;
@@ -13,7 +13,6 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             position: relative;
             min-height: 100vh;
-            overflow: hidden;
         }
 
         #starfield {
@@ -23,7 +22,7 @@
             pointer-events: none;
         }
 
-        /* Ambient Low-Opacity Space Nebula Fields */
+        /* Ambient Glowing Nebula Blobs */
         .nebula {
             position: fixed;
             width: 500px;
@@ -58,36 +57,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2.5rem;
-            height: 100vh;
-            justify-content: space-between;
+            padding: 2.5rem 1.5rem;
+            min-height: 100vh;
         }
 
         header {
             width: 100%;
-            max-w: 1200px;
+            max-w: 1000px;
             display: flex;
             justify-content: space-between;
             font-family: monospace;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             letter-spacing: 4px;
             color: #334155;
             text-transform: uppercase;
+            margin-bottom: 4rem;
         }
 
         main {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 2rem;
             width: 100%;
-            max-w: 640px;
-            margin: auto;
-            text-align: center;
+            max-w: 700px;
+            margin-bottom: auto;
         }
 
-        /* Minimalist Search Branding */
         h1 {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 900;
@@ -96,6 +91,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
         h1 span {
             background: linear-gradient(to right, #06b6d4, #6366f1);
@@ -103,10 +99,11 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Glassmorphic Active Search Form Input Bar */
+        /* Glassmorphic Cyber Search Entry Console */
         .search-wrapper {
             width: 100%;
             position: relative;
+            margin-bottom: 2rem;
         }
         .search-bar {
             width: 100%;
@@ -114,18 +111,18 @@
             border: 1px solid rgba(51, 65, 85, 0.5);
             padding: 1.1rem 1.5rem;
             padding-left: 3rem;
-            border-radius: 9999px;
+            border-radius: 14px;
             color: #f8fafc;
             font-size: 1rem;
             outline: none;
             backdrop-filter: blur(12px);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+            font-family: monospace;
         }
         .search-bar:focus {
             border-color: #06b6d4;
-            background: rgba(15, 23, 42, 0.6);
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15), 0 20px 40px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
         }
 
         .search-icon {
@@ -139,22 +136,38 @@
             pointer-events: none;
         }
 
-        /* System Interface Badges */
-        .status-badge {
+        /* EMBEDDED INTERNAL DATA DISPLAY SCREEN */
+        .results-box {
+            width: 100%;
+            background: rgba(10, 15, 28, 0.6);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+            border-radius: 14px;
+            padding: 1.5rem;
+            min-height: 100px;
+            backdrop-filter: blur(8px);
+            text-align: left;
+            display: none; /* Triggers open upon data fetch */
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+        }
+        .result-title {
             font-family: monospace;
-            font-size: 0.65rem;
+            font-size: 0.95rem;
             color: #06b6d4;
-            border: 1px solid rgba(6, 182, 212, 0.2);
-            background: rgba(6, 182, 212, 0.02);
-            padding: 4px 12px;
-            border-radius: 9999px;
-            letter-spacing: 1.5px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.3);
+            padding-bottom: 6px;
+        }
+        .result-body {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
         }
 
         footer {
             width: 100%;
-            max-w: 1200px;
+            max-w: 1000px;
             display: flex;
             justify-content: space-between;
             font-family: monospace;
@@ -162,14 +175,14 @@
             color: #1e293b;
             border-top: 1px solid rgba(51, 65, 85, 0.1);
             padding-top: 1.5rem;
+            margin-top: 2rem;
         }
         footer a { color: #1e293b; text-decoration: none; }
-        footer a:hover { color: #475569; }
     </style>
 </head>
 <body>
 
-    <!-- Canvas Backplane Layer -->
+    <!-- Ambient Visual Background Arrays -->
     <canvas id="starfield"></canvas>
     <div class="nebula purple"></div>
     <div class="nebula cyan"></div>
@@ -177,31 +190,26 @@
 
     <div class="interface-grid">
         <header>
-            <div>Space Mainframe</div>
-            <div style="color: #475569;">DDG Node Live</div>
+            <div>Gideon Mainframe</div>
+            <div style="color: #475569;">API Node Active</div>
         </header>
 
         <main>
-            <!-- Native Native DuckDuckGo Engine Form Wrapper -->
-            <form action="https://duckduckgo.com/" method="get" target="_blank" style="width: 100%; display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
-                
-                <h1>Space<span>.Search</span></h1>
-                
-                <div class="status-badge">Engine Node: DuckDuckGo Privacy Core</div>
+            <h1>Space<span>.Search</span></h1>
+            
+            <!-- Real-Time Internal Data Form Handler -->
+            <div class="search-wrapper">
+                <svg class="search-icon" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="terminalQuery" class="search-bar" placeholder="Query internal knowledge layers..." autocomplete="off" onkeypress="handleKeyPress(event)" autofocus>
+            </div>
 
-                <!-- Input Text Box Field Maps Direct to DDG Param Name "q" -->
-                <div class="search-wrapper">
-                    <svg class="search-icon" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <input type="text" name="q" class="search-bar" placeholder="Search privately across the cosmos..." autocomplete="off" autofocus required>
-                </div>
-
-                <!-- Hidden Parameter Config Hooks Modifying the DDG Output Style -->
-                <input type="hidden" name="ka" value="h"> <!-- Use Helvetica text metrics -->
-                <input type="hidden" name="kt" value="h"> <!-- Clean design template -->
-                <input type="hidden" name="kh" value="1"> <!-- Safe search parameters lock -->
-            </form>
+            <!-- ZERO REDIRECT INTERNAL OUTPUT NODE -->
+            <div id="resultsDisplay" class="results-box">
+                <div class="result-title" id="resTitle">System Log</div>
+                <div class="result-body" id="resBody">Awaiting query parameters...</div>
+            </div>
         </main>
 
         <footer>
@@ -210,8 +218,8 @@
         </footer>
     </div>
 
-    <!-- Active Mouse-Tracking Star Field Loop Logic Script -->
     <script>
+        // High-Performance Ambient Star Engine
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
         let stars = [];
@@ -265,6 +273,40 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // INTERNAL ZERO-REDIRECT INTERCEPTOR API
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                const queryText = document.getElementById('terminalQuery').value.trim();
+                if (!queryText) return;
+
+                const displayBox = document.getElementById('resultsDisplay');
+                const titleNode = document.getElementById('resTitle');
+                const bodyNode = document.getElementById('resBody');
+
+                // Set local loading markers instantly without a page jump
+                displayBox.style.display = "block";
+                titleNode.innerText = "Querying Database...";
+                bodyNode.innerText = `Connecting packet routes for "${queryText}"...`;
+
+                // Fetch data directly from open knowledge api systems
+                const url = `https://wikipedia.org{encodeURIComponent(queryText)}`;
+
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) throw new Error("No database match found.");
+                        return response.json();
+                    })
+                    .then(data => {
+                        titleNode.innerText = `Result Found: ${data.title}`;
+                        bodyNode.innerText = data.extract || "Data payload exists but lacks standard abstract log formatting.";
+                    })
+                    .catch(error => {
+                        titleNode.innerText = "System Exception Logged";
+                        bodyNode.innerText = `Could not retrieve embedded index blocks for "${queryText}". Verify data spelling formatting parameters and try again.`;
+                    });
+            }
+        }
     </script>
 </body>
 </html>
