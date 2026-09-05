@@ -1,177 +1,1050 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" itemscope itemtype="http://schema.org/WebPage" lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gideon Riggins | Photo Archive</title>
-    <style>
-        /* Modern Setup and Reset Layout Geometry */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            background-color: #05070c;
-            color: #f1f5f9;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no" />
 
-        header {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+	<meta name="Author" content="Zorin" />
+	<title>Zorin OS Pro - Zorin OS</title>
 
-        h1 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to right, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+	<meta name="description" content="Zorin OS Pro brings together the best apps and most advanced features, so you can unleash the full potential of your computer to do your greatest work. Built to meet the needs of power users and creative professionals, yet simple enough for everyone.">
+	<meta name="keywords" content="Zorin OS, Zorin, OS, Linux, Desktop, Ubuntu, Operating System, Operating, System, Distro, Distribution, Windows, Replacement, Alternative, Computer, Open Source, Faster, Virus-resistant, Secure, Privacy">
 
-        .upload-badge {
-            font-size: 0.75rem;
-            font-family: monospace;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 14px;
-            border-radius: 9999px;
-            color: #38bdf8;
-            letter-spacing: 1px;
-        }
+	<meta property="og:type" content="website"/>
+	<meta property="og:title" content="Zorin OS Pro - Zorin OS"/>
+	<meta property="og:image" content="https://assets.zorincdn.com/zorin.com/images/icon.png"/>
+	<meta property="og:site_name" content="Zorin"/>
+	<meta property="og:description" content="Zorin OS Pro brings together the best apps and most advanced features, so you can unleash the full potential of your computer to do your greatest work. Built to meet the needs of power users and creative professionals, yet simple enough for everyone."/>
 
-        main {
-            flex: 1;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+	<meta name="twitter:title" content="Zorin OS Pro - Zorin OS"/>
+	<meta name="twitter:image" content="https://assets.zorincdn.com/zorin.com/images/icon.png"/>
+	<meta name="twitter:card" content="Zorin OS Pro brings together the best apps and most advanced features, so you can unleash the full potential of your computer to do your greatest work. Built to meet the needs of power users and creative professionals, yet simple enough for everyone."/>
+	<meta name="twitter:site" content="@ZorinOS">
+	<meta name="twitter:creator" content="@ZorinOS">
 
-        /* 🖼️ AUTOMATED MASONRY FLOW PHOTO GRID */
-        .photo-gallery {
-            column-count: 1;
-            column-gap: 1.5rem;
-            width: 100%;
-        }
+	<meta itemprop="name" content="Zorin OS">
+	<meta itemprop="description" content="Zorin OS Pro brings together the best apps and most advanced features, so you can unleash the full potential of your computer to do your greatest work. Built to meet the needs of power users and creative professionals, yet simple enough for everyone.">
+	<meta itemprop="image" content="https://assets.zorincdn.com/zorin.com/images/icon.png">
 
-        /* Responsive column distribution rules based on monitor size */
-        @media (min-width: 480px) { .photo-gallery { column-count: 2; } }
-        @media (min-width: 768px) { .photo-gallery { column-count: 3; } }
-        @media (min-width: 1024px) { .photo-gallery { column-count: 4; } }
+	<link rel="stylesheet" type="text/css" href="https://assets.zorincdn.com/zorin.com/css/common.min.css">
+	<link rel="stylesheet" type="text/css" href="https://assets.zorincdn.com/zorin.com/css/pro.min.css">
+        <link rel="stylesheet" type="text/css" href="https://assets.zorincdn.com/zorin.com/vendor/inter/inter.min.css">
+	<link rel="stylesheet" type="text/css" href="https://assets.zorincdn.com/zorin.com/vendor/space-grotesk/space-grotesk.min.css">
+	<link rel="stylesheet" type="text/css" href="https://assets.zorincdn.com/zorin.com/css/swiper.min.css">
 
-        .photo-card {
-            background: #0e111a;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            margin-bottom: 1.5rem;
-            break-inside: avoid;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
-        }
+	<link rel="alternate" type="text/html" hreflang="en" href="/">
+	<base href="/">
 
-        .photo-card:hover {
-            transform: scale(1.02);
-            border-color: rgba(56, 189, 248, 0.3);
-        }
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#15a6f0">
+	<meta name="msapplication-TileColor" content="#15a6f0">
+	<meta name="theme-color" content="#ffffff">
 
-        .photo-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-            background-color: #090b11; /* Pre-render skeleton backdrop */
-        }
+	<link rel="prerender prefetch" href="https://zorin.com/os/pro/purchase/"/>
 
-        .photo-meta {
-            padding: 1rem;
-            font-size: 0.8rem;
-            color: #475569;
-            font-family: monospace;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+	<script>
+		document.documentElement.classList.remove("no-js");
+	</script>
+	<script src="https://assets.zorincdn.com/zorin.com/vendor/modernizr/3.6.0/modernizr-webp.js"></script>
 
-        .photo-tag {
-            color: #38bdf8;
-            font-weight: bold;
-        }
-
-        footer {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #1e293b;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-    </style>
+	<script async defer data-domain="zorin.com" src="https://hjonk.zorin.com/js/script.ol.js"></script>
 </head>
+
 <body>
+	<header>
+		<nav id="main">
+			<div class="container">
+				<a href="/" class="logotype"><span class="sr-text">Zorin</span></a>
 
-    <header>
-        <h1>Gideon Riggins / Photo.Archive</h1>
-        <div class="upload-badge">ARCHIVE ONLINE</div>
-    </header>
+				<ul class="menu" id="main-menu">
+					<li class="current"><a href="/os/">Zorin OS</a></li>
+					<li><a href="/grid/">Zorin Grid</a></li>
+					<li><a href="/computers/">Computers</a></li>
+					<li><a href="https://help.zorin.com">Help</a></li>
+				</ul>
 
-    <main>
-        <!-- MULTI-COLUMN MASONRY PHOTO FEED -->
-        <div class="photo-gallery">
-            
-            <!-- CARD 1: CARINA NEBULA -->
-            <div class="photo-card">
-                <img src="https://unsplash.com" alt="Deep Cosmic Nebula">
-                <div class="photo-meta"><span class="photo-tag">#001_CARINA</span><span>CELESTIAL</span></div>
-            </div>
+				<div class="responsive" id="responsive-icon">
+					<a href="javascript:void(0);" onclick="responsiveMenu()" class="button"><strong>&#9776;</strong> Menu</a>
+				</div>
+			</div>
+		</nav>
+		<div class="nav-placeholder"></div>
+	</header>
 
-            <!-- CARD 2: DIGITAL CORE MATRIX -->
-            <div class="photo-card">
-                <img src="https://unsplash.com" alt="Digital Matrix Wireframe">
-                <div class="photo-meta"><span class="photo-tag">#002_MATRIX</span><span>DATA_CELL</span></div>
-            </div>
+	<nav class="secondary">
+		<div class="navbar">
+			<div class="overflow-fade"></div>
+			
+			<div class="container">
+				<a href="/os/"><img src="https://assets.zorincdn.com/zorin.com/images/home/zorin-os.svg" alt="Zorin OS" class="logotype tablet-hidden"></a>
+				
+				<ul class="menu">
+					<li><a href="/os/">Overview</a></li>
+					<li><a href="/os/education/">For Schools</a></li>
+					<li class="current"><a href="/os/pro/">Pro</a></li>
+					<li><a href="/os/download/">Download</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-            <!-- CARD 3: CHRONO SWIRL FLUID -->
-            <div class="photo-card">
-                <img src="https://unsplash.com" alt="Abstract Fluid Flow Texture">
-                <div class="photo-meta"><span class="photo-tag">#003_CHRONO</span><span>ABSTRACT</span></div>
-            </div>
+	<section id="hero" class="white">
+	  	<div class="container">
+		  	<div class="col-9 float-none margin-auto text-center">
+		    <h1 class="h3 muted"><span style="font-weight:400">Zorin OS 18.1</span> Pro</h1>
+				<h2 class="h1 text-wrap-balance">Your computer. Fully unleashed.</h2>
+				<video class="max-width-100 rounded" poster="https://assets.zorincdn.com/zorin.com/images/download/18/pro-cover.jpg" autoplay loop muted playsinline><source src="https://assets.zorincdn.com/zorin.com/videos/18/pro.webm" type="video/webm"></video>
+			</div>
+		</div>
+		<div class="container narrow text-center">
+		  	<p>Zorin OS Pro brings together the best apps and most advanced features, so you can unleash the full potential of your computer to do your greatest work. Built to meet the needs of power users &amp; creative professionals, yet simple enough for everyone.</p>
+			  <div class="hidden-no-js d-block" style="font-size:15px;letter-spacing:-0.008em;color:rgba(18,51,84,.6);font-weight:500;margin: 0 0 16px 0;">Only <span class="total"></span></div>
+				<a href="/os/pro/purchase/" class="button suggested shadow">Download Zorin OS 18.1 Pro</a>
+			  <div class="d-block" style="font-size:15px;letter-spacing:-0.008em;color:rgba(18,51,84,.5);font-weight:400;margin: 16px 0 0 0;"><a style="cursor:default;text-decoration:none;" title="No recurring subscription. Purchase once and get all updates in the Zorin OS 18 Pro version series for its life.">One-time payment</a> &middot; Setup support available</div>
+		</div>
+	</section>
 
-            <!-- CARD 4: INFRARED HORIZON -->
-            <div class="photo-card">
-                <img src="https://unsplash.com" alt="Infrared Horizon Topography">
-                <div class="photo-meta"><span class="photo-tag">#004_INFRARED</span><span>VECTOR</span></div>
-            </div>
+	<nav id="secondary" class="secondary scroll-hidden">
+		<div class="overflow-fade"></div>
+		
+		<div class="container">
+			<a href="/os/pro/#" class="title">Zorin OS Pro</a>
+			
+			<ul class="menu">
+				<li><a href="/os/pro/#compare">Compare editions</a></li>
+				<li><a href="/os/pro/#faqs">FAQs</a></li>
+			        <li><a href="/os/pro/purchase/" class="button suggested float-right">Download</a></li>
+			</ul>
+		</div>
+	</nav>
 
-            <!-- CARD 5: STELLAR MAGMA -->
-            <div class="photo-card">
-                <img src="https://unsplash.com" alt="Stellar Magma Background">
-                <div class="photo-meta"><span class="photo-tag">#005_MAGMA</span><span>THERMAL</span></div>
-            </div>
+	<div id="content">
+		<section id="layouts" class="less-padding">
+			<div class="container narrow text-center">
+				<h2><span class="muted d-block">Pick a desktop.</span> Any desktop.</h2>
+				<p>The Zorin Appearance app has been extended to include all 12 desktop layouts in Zorin OS Pro. You can use the desktop you're familiar with or simply customize your workspace to how you like it. </p>
+			</div>
 
-            <!-- CARD 6: CYBER MATRIX CORE -->
-            <div class="photo-card">
-                <img src="https://unsplash.com" alt="Cyber Wireframe Grid Core">
-                <div class="photo-meta"><span class="photo-tag">#006_CYBER_CORE</span><span>GRID_NODE</span></div>
-            </div>
+			<div class="container">
+				<div class="row">
+					<div class="col-12 d-block margin-auto float-none">
+						<div id="premium-layouts" class="rounded white thumbnails text-center">
+							<h3>8 Premium desktop layouts <span class="muted d-inline-block">only in Zorin OS Pro</span></h3>
+							<div class="row">
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/macos.jpg" alt="macOS-like layout" data-zoomable loading="lazy">
+									<div class="layout-name">macOS<span class="muted">-like</span></div>
+								</div>
 
-        </div>
-    </main>
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/windows-11.jpg" alt="Windows 11-like layout" data-zoomable loading="lazy">
+									<div class="layout-name">Windows 11<span class="muted">-like</span></div>
+								</div>
 
-    <footer>
-        &copy; 2026 Gideon Riggins. Media stream processing stable.
-    </footer>
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/windows-classic.jpg" alt="Window Classic-like layout" data-zoomable loading="lazy">
+									<div class="layout-name">Windows Classic<span class="muted">-like</span></div>
+								</div>
 
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/chromeos.jpg" alt="ChromeOS-like layout" data-zoomable loading="lazy">
+									<div class="layout-name">ChromeOS<span class="muted">-like</span></div>
+								</div>
+
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/compact.jpg" alt="Compact panel layout" data-zoomable loading="lazy">
+									<div class="layout-name">Compact<span class="muted"> panel</span></div>
+								</div>
+
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/ubuntu.jpg" alt="Ubuntu-like layout" data-zoomable loading="lazy">
+									<div class="layout-name">Ubuntu<span class="muted">-like</span></div>
+								</div>
+
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/elementary-os.jpg" alt="elementary OS-like layout" data-zoomable loading="lazy">
+									<div class="layout-name">elementary OS<span class="muted">-like</span></div>
+								</div>
+
+								<div class="col-3">
+									<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/cinnamon.jpg" alt="Cinnamon-like layout" data-zoomable loading="lazy">
+									<div class="layout-name">Cinnamon<span class="muted">-like</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row text-center">
+					<span class="muted h3 d-block font-400 plus">+</span>
+				</div>
+
+				<div class="row">
+					<div class="thumbnails text-center">
+						<h3>4 Core desktop layouts</h3>
+						<div class="row">
+							<div class="col-3">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/windows-icons.jpg" class="shadow" alt="Windows-like layout" data-zoomable loading="lazy">
+								<div class="layout-name">Windows<span class="muted">-like</span></div>
+							</div>
+
+							<div class="col-3">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/touch.jpg" class="shadow" alt="Touch layout" data-zoomable loading="lazy">
+								<div class="layout-name">Touch</div>
+							</div>
+
+							<div class="col-3">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/windows-list.jpg" class="shadow" alt="Windows List-like layout" data-zoomable loading="lazy">
+								<div class="layout-name">Windows List<span class="muted">-like</span></div>
+							</div>
+							
+							<div class="col-3">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/layouts/18/gnome-shell.jpg" class="shadow" alt="GNOME Shell-like layout" data-zoomable loading="lazy">
+								<div class="layout-name">GNOME Shell<span class="muted">-like</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="creative-suite">
+			<div class="container">
+				<div class="col-5">
+				  	<div class="box">
+						<h2><span class="muted">Professional-grade</span> creative suite<span class="muted">.</span></h2>
+						<p>Create with the same apps the pros use. Zorin OS Pro includes an advanced video editor, Photoshop-compatible image editor, illustration software, audio workstation, animation software, and the same 3D graphics &amp; effects software used by Hollywood studios, just to name a few. With tools this powerful, your imagination is the only limit.</p>
+					</div>
+				</div>
+			</div>
+
+			<figure class="display-container">
+				<div class="slideshow">
+					<picture>
+						<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/kdenlive.webp" type="image/webp">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/kdenlive.png" alt="Video Editor" loading="lazy">
+					</picture>
+					<picture>
+						<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/inkscape.webp" type="image/webp">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/inkscape.png" alt="Illustration Software" loading="lazy">
+					</picture>
+					<picture>
+						<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/gimp.webp" type="image/webp">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/gimp.png" alt="Image Editor" loading="lazy">
+					</picture>
+					<picture>
+						<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/blender.webp" type="image/webp">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/blender.png" alt="3D Graphics & Effects Software" loading="lazy">
+					</picture>
+					<picture>
+						<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/ardour.webp" type="image/webp">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/screenshots/ardour.png" alt="Audio Workstation" loading="lazy">
+					</picture>
+				</div>
+			</figure>
+		</section>
+
+		<section id="press" style="padding-top:0;">
+			<div class="container narrow white rounded card shadow" style="padding:32px 16px;border-radius:32px;">
+        <blockquote cite="https://www.howtogeek.com/these-free-linux-apps-made-expensive-creative-software-harder-to-justify/">
+          <p class="huge text-center font-700" style="color: rgba(18, 51, 84, 1);">&ldquo;[These apps] made expensive creative software harder to justify…</p>
+          <p class="huge text-center" style="margin-bottom:0;">[they] gave me enough capability to treat <span class="d-inline-block">Zorin OS</span> like a real working machine&rdquo;</p>
+        </blockquote>
+        <img src="https://assets.zorincdn.com/zorin.com/images/pro/how-to-geek.svg" alt="How-To Geek" class="d-block margin-auto" style="height:48px;padding:32px 0;">
+			</div>
+		</section>
+
+		<section id="productivity" class="less-padding">
+			<div class="container card rounded grey">
+				<div id="productivity-intro" class="row">
+					<div class="container text-center">
+						<h2><span class="muted">Get more done with</span> <span class="d-inline-block">advanced productivity tools<span class="muted">.</span></span></h2>
+					</div>
+				</div>
+
+				<div id="deskflow" class="row">
+					<picture>
+						<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/deskflow/18.webp" type="image/webp">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/deskflow/18.png" alt="A desktop computer with 2 laptops at either side" loading="lazy">
+					</picture>
+					<div class="col-7 padded">
+						<h3>Share your mouse and keyboard<span class="muted"> across computers.</span></h3>
+						<p>Use one mouse and keyboard to control all of your computers with the Deskflow app. Simply move the cursor to the edge of the screen to switch between devices seamlessly. It even shares the clipboard, so you can copy text from one computer to paste into a document on another computer. All communication happens over an encrypted connection on your local network, so you can stay safe while typing passwords and working with sensitive data across computers.</p>
+					</div>
+				</div>
+
+				<div id="planify" class="row">
+					<div class="parent">
+						<div class="box">
+							<div class="text-box">
+								<h3><span class="muted">Make </span>real progress <span class="muted">toward your goals.</span></h3>
+								<p>Never worry about forgetting things again with Planify. It's the ultimate task manager app to help you plan your day. Create to-do lists, schedule tasks with reminders, track your progress, manage your projects, and sync it with the cloud. Its intuitive design gets out of your way, so you can focus on becoming more organized and productive.</p>
+							</div>
+						</div>
+
+						<picture>
+							<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/planify/18.webp" type="image/webp">
+							<img src="https://assets.zorincdn.com/zorin.com/images/pro/planify/18.png" alt="Planify app floating off a computer monitor" loading="lazy">
+						</picture>
+					</div>
+				</div>
+
+				<div id="xournal" class="row">
+					<img src="https://assets.zorincdn.com/zorin.com/images/pro/xournal.png" alt="Taking notes on a convertible laptop" loading="lazy">
+					<div class="col-5 padded">
+						<h3>Write<span class="muted">, </span>sketch<span class="muted">, </span>scribble<span class="muted">, and </span>speak<span class="muted"> your notes.</span></h3>
+						<p>Take notes or annotate images &amp; PDF documents effortlessly with the Xournal++ app. Pick up a pen to write naturally, draw diagrams with automatic shape recognition, or simply type with your keyboard. It can even record audio from the microphone while taking notes, so you can remember everything from your meetings or lectures.</p>
+					</div>
+				</div>
+
+				<div id="network-displays" class="row">
+					<div class="container narrow text-center padded">
+						<h3>Cast your desktop<span class="muted"> to the big screen.</span></h3>
+						<p>The Network Displays app allows you to share your desktop with other displays seamlessly and wirelessly. It connects over your local network and works with Wi-Fi Display or Miracast-compatible devices, like most modern TVs or Wireless Display Adapters. It's perfect for playing back videos at home or showing your presentation at the office without needing to fiddle with cables.</p>
+					</div>
+					<picture>
+						<source srcset="https://assets.zorincdn.com/zorin.com/images/pro/network-displays/18.webp" type="image/webp">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/network-displays/18.png" alt="Laptop casting a film to a TV" loading="lazy">
+					</picture>
+					<div class="container narrow text-center">
+						<small><span class="muted d-block">Film: Sprite Fright (Blender Animation Studio)</span>Created with Blender which is included in Zorin OS Pro.</small>
+					</div>
+				</div>
+				
+				<div id="other-productivity" class="row">
+					<div class="container narrow text-center padded">
+						<img src="https://assets.zorincdn.com/zorin.com/images/pro/other-productivity-apps.png" alt="Icons of other productivity apps" class="d-block margin-auto" loading="lazy">
+						<h3>…and many other productivity apps.</h3>
+					</div>
+					
+					<div class="row">
+						<div class="marquee productivity-top-swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide rounded" style="background-color:#d4edf8;color:#193b48;">
+									<p class="muted">3D CAD</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#dee2f7;color:#191e48;">
+									<p class="muted">Mind Maps</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#e0efe3;color:#194820;">
+									<p class="muted">E-book Reader</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#ede0ef;color:#3f1948;">
+									<p class="muted">Feed Reader</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#f8e3d4;color:#482d19;">
+									<p class="muted">Accounting Software</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#efd7e1;color:#48192d;">
+									<p class="muted">Pomodoro Timer</p>
+								</div>
+							</div>
+						</div>
+						<div class="marquee productivity-bottom-swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide rounded" style="background-color:#d4edf8;color:#193b48">
+									<p class="muted">Office Suite</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#efd7e1;color:#48192d;">
+									<p class="muted">Screen Recorder</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#e0efe3;color:#194820;">
+									<p class="muted">Task Time Tracker</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#dee2f7;color:#191e48;">
+									<p class="muted">Password Manager</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#f8e3d4;color:#482d19;">
+									<p class="muted">Ambient Focus Sounds</p>
+								</div>
+								<div class="swiper-slide rounded" style="background-color:#e0efe3;color:#194820;">
+									<p class="muted">2D CAD</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="support">
+			<div class="container narrow text-center">
+				<h2><span class="muted d-block">Get help from us with </span>Zorin Installation Support<span class="muted">.</span></h2>
+				<p>Have any questions or queries while setting up Zorin OS? Each copy of Zorin OS Pro comes bundled with the Zorin Installation Support service for one computer. It lets you get technical support by email directly from our team.</p>
+			</div>
+		</section>
+
+		<section id="development">
+			<div class="container black rounded card shadow">
+				<div class="row">
+					<div class="col-4">
+						<figure style="background-image: url('https://assets.zorincdn.com/zorin.com/images/pro/support.svg');"></figure>
+					</div>
+
+					<div class="col-8">
+						<h2>Contributes to the development of Zorin OS.</h2>
+					  	<p class="large"><span class="muted">As an independent company, we want to create great products that </span>give back your privacy and freedom<span class="muted">. Every purchase of Zorin OS Pro helps to fund our operations, so we can </span>improve Zorin OS further<span class="muted"> for the benefit of all.</span></p>
+					  	<a href="/os/why-pay/" class="learn-more" target="_blank" rel="noopener">Why pay for Zorin OS</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="wallpapers">
+			<div class="container narrow text-center">
+				<h2>Stunning artwork<span class="muted"><br> to inspire you.</span></h2>
+				<p>Zorin OS Pro includes a handpicked collection of beautiful abstract wallpapers in addition to the standard set. It fosters an environment that will spark your creativity.</p>
+			</div>
+			
+			<div class="row">
+				<div class="wallpapers-swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/radiant.jpg" alt="Radiant wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/blue-cubes.jpg" alt="Blue-Cubes wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/fluid.jpg" alt="Fluid wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/purple.jpg" alt="Purple wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/iridescent.jpg" alt="Iridescent wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/black-and-yellow.jpg" alt="Black-and-Yellow wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/crosshatch.jpg" alt="Crosshatch wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/emerald.jpg" alt="Emerald wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/dark-curves.jpg" alt="Dark Curves wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/tiled.jpg" alt="Tiled wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/drops.jpg" alt="Drops wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/abstract.jpg" alt="Abstract wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/rounded.jpg" alt="Rounded wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/prismic.jpg" alt="Prismic wallpaper" class="shadow">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="box">
+								<img src="https://assets.zorincdn.com/zorin.com/images/pro/wallpapers/18/green.jpg" alt="Green wallpaper" class="shadow">
+							</div>
+						</div>
+					</div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="alternatives">
+			<div class="container narrow text-center">
+				<h2><span class="muted">Bundled with curated</span> alternatives to over $5,000 of professional software<span class="muted">.</span></h2>
+			</div>
+			<div id="alternatives-list" class="side-by-side-list">
+				<div class="column-container grow">
+					<ul class="item-wrapper full-height">
+						<li class="sticky">
+							<div id="alternatives-title-box">
+								<h2><span class="muted">Bundled with curated</span> alternatives to <span class="d-inline-block">over $5,000 of professional software<span class="muted">.</span></span></h2>
+							</div>
+							<div class="zorin-os-box">
+								<div class="card black zorin-os rounded shadow">
+									<div class="app">
+										<h3>Zorin OS 18.1 Pro</h3>
+										<div class="app-name">
+											Your complete software package:
+											<ul>
+												<li><span class="font-600">Professional-grade creative suite</span></li>
+												<li><span class="font-600">Advanced productivity tools</span></li>
+												<li><span class="font-600">Office suite</span> <span class="muted">(compatible with <span class="d-inline-block">Microsoft Office/365</span> documents)</span></li>
+												<li><span class="font-600">Technical support service</span></li>
+											</ul>
+										</div>
+									</div>
+									<div class="price">
+										<div class="label">
+										Only
+											<div class="sum"><span class="total"></span></div>
+										</div>
+									</div>
+								</div>
+								<div class="vs">
+									<div class="label">vs</div>
+								</div>
+							</div>
+							<div class="card small-desktop-hidden" style="background-color:transparent;padding-right:128px;padding-bottom:0;">
+								<a href="https://blog.zorin.com/2025/12/17/our-gift-to-the-open-source-ecosystem-this-holiday-season/" target="_blank" rel="noopener" class="learn-more">View how we fund the Open Source ecosystem</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="column-container grow">
+					<ul class="item-wrapper">
+						<li>
+							<div class="card rounded" style="background-color:#f8e3d4;color:#482d19;">
+								<div class="app">
+									<h3>Office suite</h3>
+									<div class="app-name">Microsoft Office Home &amp; Business</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$249<span class="cents">.99</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#d4edf8;color:#193b48;">
+								<div class="app">
+									<h3>Image editor &amp; Illustrator</h3>
+									<div class="app-name">CorelDRAW &amp; Corel PHOTO-PAINT <span class="muted d-inline-block">(Standard)</span></div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$299</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded">
+								<div class="app">
+									<h3>Audio editor</h3>
+									<div class="app-name">WavePad <span class="muted d-inline-block">(Standard Edition)</span></div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$60</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#ede0ef;color:#3f1948;">
+								<div class="app">
+									<h3>Video editor</h3>
+									<div class="app-name">Adobe Premiere Pro <span class="muted d-inline-block">(annual subscription)</span></div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$263<span class="cents">.88</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#efd7e1;color:#48192d;">
+								<div class="app">
+									<h3>Digital painting</h3>
+									<div class="app-name">Procreate</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$12<span class="cents">.99</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#dee2f7;color:#191e48;">
+								<div class="app">
+									<h3>Photography workflow</h3>
+									<div class="app-name">AfterShot Pro</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$79<span class="cents">.99</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded">
+								<div class="app">
+									<h3>Finance &amp; accounting</h3>
+									<div class="app-name">GreenBooks</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$29<span class="cents">.99</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#d4edf8;color:#193b48;">
+								<div class="app">
+									<h3>Personal task manager</h3>
+									<div class="app-name">Things</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$49<span class="cents">.99</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#f8e3d4;color:#482d19;">
+								<div class="app">
+									<h3>Mind mapping</h3>
+									<div class="app-name">SimpleMind Pro</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$29<span class="cents">.99</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#efd7e1;color:#48192d;">
+								<div class="app">
+									<h3>Computer aided design (CAD)</h3>
+									<div class="app-name">Autodesk AutoCAD <span class="muted d-inline-block">(annual subscription)</span></div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$1,975</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#dee2f7;color:#191e48;">
+								<div class="app">
+									<h3>3D graphics &amp; VFX</h3>
+									<div class="app-name">Autodesk Maya <span class="muted d-inline-block">(annual subscription)</span></div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$1,875</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#ede0ef;color:#3f1948;">
+								<div class="app">
+									<h3>DJ software</h3>
+									<div class="app-name">Traktor Pro</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$99</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#f8e3d4;color:#482d19;">
+								<div class="app">
+									<h3>Digital audio workspace</h3>
+									<div class="app-name">FL Studio <span class="muted d-inline-block">(Fruity Edition)</span></div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$99</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded" style="background-color:#d4edf8;color:#193b48;">
+								<div class="app">
+									<h3>Focused writing app</h3>
+									<div class="app-name">iA Writer</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$29<span class="cents">.99</span></div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="card rounded">
+								<div class="app">
+									<h3>Mouse &amp; keyboard sharing</h3>
+									<div class="app-name">Synergy 3 Max</div>
+								</div>
+								<div class="price">
+									<div class="label">
+										<div class="sum">$29</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="text-center">
+							<h3 class="more">…and more.</h3>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="feedback" class="less-padding">
+			<h2 class="text-center"><span class="muted">People </span>really like<span class="muted"> <span class="d-inline-block">Zorin OS Pro.</span></span></h2>
+			<div class="container narrow">
+				<div class="testimonial left">
+					<blockquote class="card rounded white" style="max-width:400px;background-color:#e0efe3;color:#194820;">
+						<p>&ldquo;Zorin OS Pro is very literally <span class="font-700">the best Linux operating system</span> I have ever used&rdquo;</p>
+					</blockquote>
+				</div>
+				<div class="testimonial right">
+					<blockquote class="card rounded white" style="max-width:470px;background-color:#d4edf8;color:#193b48;text-align:right;" cite="http://linuxblog.darkduck.com/2012/07/zorin-os-ultimate-save-me-money.html.html">
+						<p>&ldquo;Did [Zorin OS Pro] <span class="font-700">save me money</span>? You bet it did.&rdquo;</p>
+					</blockquote>
+				</div>
+				<div class="testimonial left">
+					<blockquote class="card rounded white" style="max-width:500px;background-color:#dee2f7;color:#191e48;">
+						<p>&ldquo;…installed Zorin OS Pro today. Bravo! You excelled very nicely <span class="font-700">above and beyond my prior Zorin OS Core</span>&rdquo;</p>
+					</blockquote>
+				</div>
+				<div class="testimonial right">
+					<blockquote class="card rounded white" style="max-width:345px;background-color:#ede0ef;color:#3f1948;text-align:right;">
+						<p>&ldquo;I paid for this OS and I never do that. I have to say <span class="font-700">it is worth every penny!</span>&rdquo;</p>
+					</blockquote>
+				</div>
+				<div class="testimonial left">
+					<blockquote class="card rounded white" style="max-width:555px;background-color:#f8e3d4;color:#482d19;" cite="https://www.facebook.com/ZorinOS/reviews">
+						<p>&ldquo;Love the OS experience, <span class="font-700">happy to support the Pro version.</span>&rdquo;</p>
+					</blockquote>
+				</div>
+			</div>
+		</section>
+
+		<section id="compare">
+			<div class="container narrow text-center">
+				<h2>Compare Zorin OS editions.</h2>
+
+                                <div class="d-block" style="overflow-x: auto">
+				        <table>
+					        <thead class="muted">
+						        <tr>
+							        <th class="hide"></th>
+							        <th>Pro</th>
+							        <th>Core</th>
+						        </tr>
+					        </thead>
+
+					        <tbody>
+						        <tr>
+							        <td>Standard apps<span class="d-block font-normal muted">web browser, music &amp; video players, utilities</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+						        </tr>
+
+						        <tr>
+							        <td>Office suite<span class="d-block font-normal muted">compatible with Microsoft Office/365 documents</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+						        </tr>
+
+						        <tr>
+							        <td>Zorin Connect<span class="d-block font-normal muted">link your phone and computer together</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+						        </tr>
+
+						        <tr>
+							        <td>4 Core desktop layouts<span class="d-block font-normal muted">in Zorin Appearance</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+						        </tr>
+
+						        <tr>
+							        <td>+ 8 Premium desktop layouts<span class="d-block font-normal muted">macOS, Windows 11, Windows Classic, ChromeOS,<br>Compact panel, Ubuntu, elementary OS, and Cinnamon</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td></td>
+						        </tr>
+
+						        <tr>
+							        <td>Professional-grade creative suite of apps<span class="d-block font-normal muted">for design, photo, video, audio, and animation</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td></td>
+						        </tr>
+
+						        <tr>
+							        <td>Advanced productivity tools<span class="d-block font-normal muted">to organize your work, save time, stay focused, and get more done</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td></td>
+						        </tr>
+
+						        <tr>
+							        <td>Additional artwork<span class="d-block font-normal muted">handpicked collection of abstract wallpapers</span></td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td></td>
+						        </tr>
+
+						        <tr>
+							        <td>Zorin Installation Support service<span class="d-block font-normal muted">for help with setting up <span class="d-inline-block">Zorin OS</span></span></td>
+							        <td><span class="tick">✔</span></td>
+							        <td></td>
+						        </tr>
+
+						        <tr>
+							        <td>Contributes to the development of Zorin OS</td>
+							        <td><span class="tick">&#10004;</span></td>
+							        <td></td>
+						        </tr>
+					        </tbody>
+				        </table>
+                                </div>
+			</div>
+		</section>
+
+		<section id="cta" class="less-padding">
+			<div class="container rounded card grey" style="padding-top:128px;padding-bottom:128px;">
+				<div class="container narrow text-center">
+					<h2 class="text-wrap-balance">Ready to unleash your computer?</h2>
+					<a href="/os/pro/purchase/" class="button suggested shadow">Download Zorin OS 18.1 Pro</a>
+			    <div class="d-block" style="margin-top:2em;">
+				    <div class="hidden-no-js d-inline-block" style="font-size:15px;letter-spacing:-0.008em;color:rgba(18,51,84,.6);font-weight:500;margin: 0 16px 4px 0;">Only <span class="total"></span></div><div class="d-inline-block" style="margin:0 0 4px 0;"><img src="https://assets.zorincdn.com/zorin.com/images/pro/coffee.svg" alt="Coffee cup" class="d-inline-block" style="width:22px;height:22px;margin-right:4px;vertical-align:bottom;"><span style="opacity: 0.65;font-size:14px;letter-spacing:-0.008em;">Less than a daily coffee for two weeks</span></div>
+			    </div>
+				</div>
+			</div>
+		</section>
+
+		<section id="faqs">
+			<div class="container">
+				<h2 class="text-center">Frequently asked questions.</h2>
+
+                                <div>
+                                        <div class="col-6">
+                                                <div class="box">
+                                                        <p><span class="font-bold">I lost my download link for Zorin OS Pro. Can I download it without paying again?</span><br>You can request a new download link for your copy of Zorin OS Pro <a href="https://zorin.com/os/download/email/">here</a>.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">As a business, can I purchase Zorin OS Pro without sales tax?</span><br>Yes, you can pay without sales tax by selecting the "Add tax/VAT/GST number" option at the "Pay" stage of the checkout. <a href="https://help.zorin.com/docs/purchasing-zorin-os-pro/purchase-zorin-os-pro-without-sales-tax/" target="_blank" rel="noopener">More information</a></p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">Is this a subscription?</span><br>No, it's a one-time purchase. You won't need to pay again to keep using your copy of Zorin OS 18 Pro.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">How can I check whether my computer works with Zorin OS Pro before purchasing it?</span><br>You can test running Zorin OS Core, which can be downloaded for free from <a href="/os/download#core" target="_blank" rel="noopener">here</a>. You'll be able to run the operating system from a USB flash drive before installing it. If everything works on your computer, you can purchase a copy of Zorin OS Pro and install it.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">Can I install Zorin OS Pro without the creative suite and advanced productivity tools?</span><br>Yes, while installing Zorin OS Pro to your computer you can select the "Minimal installation" option to keep just the core selection of apps, premium desktop layouts in Zorin Appearance, and additional artwork.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">Is there an affiliate program for Zorin OS Pro referrals?</span><br>Yes, if you're a content creator, software reseller, or computer vendor, you can apply to join the <a href="https://zorin.com/press/#affiliate" target="_blank" rel="noopener">Zorin OS Pro Affiliate Program</a>.</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="col-6">
+                                                <div class="box">
+                                                        <p><span class="font-bold">Can I install my copy of Zorin OS Pro on multiple computers?</span><br>You can install a copy of Zorin OS Pro on multiple computers for personal use. However, sharing your personal copy of Zorin OS Pro with other parties is not permitted.<br>For use in a business or organization, you will need to purchase a copy of Zorin OS Pro for each computer you intend to use it on. To do so, please press the "Download" button on this page, enter your email address, and click the Edit link beside "Quantity" in the pricing table of the checkout.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">Will I get access to future updates of Zorin OS Pro?</span><br>The purchase will give you access to the current major version of Zorin OS Pro as well as future updates within the version series, such as upcoming point releases. Future major versions &mdash; such as Zorin OS 19 Pro &mdash; will need to be purchased separately when they will be released in the future. However, you'll be able to upgrade to future major versions at a discount. We will continue to support Zorin OS 18 with software updates until at least June 2029, and you will be able to use Zorin OS 18 Pro for life.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">Which apps and packages are pre-installed?</span><br>Information and listings regarding pre-installed apps and packages in each edition of Zorin OS are available on the <a href="/os/details" target="_blank" rel="noopener">technical details page</a>.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">What is the refund policy for Zorin OS Pro?</span><br>You can view our refund policy for purchases of Zorin OS Pro <a href="/os/pro/refund-policy/" target="_blank" rel="noopener">here</a>.</p>
+                                                </div>
+                                                <div class="box">
+                                                        <p><span class="font-bold">Can I upgrade directly from Zorin OS Core to Pro without re-installing the operating system?</span><br>Yes, you can upgrade your existing installation of Zorin OS Core to Pro in-place while keeping your files, apps, and settings. You can learn how to use the built-in "Upgrade Zorin OS" app to do this in our <a href="https://help.zorin.com/docs/getting-started/upgrade-zorin-os/" target="_blank" rel="noopener">upgrade guide</a>.</p>
+                                                </div>
+                                        </div>
+                                </div>
+			</div>
+
+			<div class="text-center">
+				<p><a href="https://help.zorin.com/docs/purchasing-zorin-os-pro/" target="_blank" rel="noopener" class="learn-more">More information about purchasing</a></p>
+			</div>
+		</section>
+	</div>
+
+	<footer class="grey">
+		<div class="container">
+			<div class="row logo-newsletter">
+				<div class="col-4 logo">
+					<a href="/" class="icon">Zorin OS homepage</a>
+				</div>
+				
+				<div class="col-8 newsletter">
+					<div class="col-4">
+						<div class="copy">Get the latest news about Zorin and tips in your inbox.</div>
+					</div>
+					<div class="col-8"><a href="/newsletter" target="_blank" rel="noopener" class="button suggested">Subscribe to our newsletter</a></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-4 ireland-social">
+					<p>Made with ☘️ in Ireland.</p>
+				
+					<div class="social">
+						<a href="https://www.facebook.com/ZorinOS/" target="_blank" rel="noopener" title="Facebook"><img src="https://assets.zorincdn.com/zorin.com/images/footer/facebook.svg" alt="Zorin OS page on Facebook" class="network"></a>
+						<a href="https://twitter.com/ZorinOS" target="_blank" rel="noopener" title="Twitter"><img src="https://assets.zorincdn.com/zorin.com/images/footer/twitter.svg" alt="Zorin OS page on Twitter" class="network"></a>
+						<a href="https://blog.zorin.com/index.xml" target="_blank" rel="noopener" title="RSS"><img src="https://assets.zorincdn.com/zorin.com/images/footer/rss.svg" alt="Zorin OS on RSS" class="network"></a>
+					</div>
+				</div>
+
+				<div class="col-8 sitemap">
+					<div class="col-4">
+						<div class="footer-heading">Products</div>
+						<ul class="menu">
+							<li><a href="/os/" class="no-decoration">Zorin OS</a></li>
+							<li><a href="/grid/" class="no-decoration">Zorin Grid</a></li>
+							<li><a href="/computers/" class="no-decoration">Computers</a></li>
+						</ul>
+					</div>
+
+					<div class="col-4">
+						<div class="footer-heading">Help</div>
+						<ul class="menu">
+							<li><a href="https://help.zorin.com/docs/getting-started/install-zorin-os/" class="no-decoration">How to Install Zorin OS</a></li>
+							<li><a href="https://help.zorin.com/docs/getting-started/system-requirements/" class="no-decoration">System Requirements</a></li>
+							<li><a href="https://help.zorin.com/docs/getting-started/switch-your-organization-from-windows/" class="no-decoration">Switch Your Organization</a></li>
+							<li><a href="https://help.zorin.com" class="no-decoration">Other Help Articles</a></li>
+						</ul>
+					</div>
+
+					<div class="col-4">
+						<div class="footer-heading">Company</div>
+						<ul class="menu">
+							<li><a href="/about/" class="no-decoration">About</a></li>
+							<li><a href="https://blog.zorin.com" class="no-decoration">Blog</a></li>
+							<li><a href="/press" class="no-decoration">Press Kit</a></li>
+							<li><a href="/about/#funding" class="no-decoration">Donate</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-12 legal">
+				<div class="info">
+					<div class="copyright"><span class="font-700">© 2008 - 2026 Zorin Group</span> All Rights Reserved.<br>Any trademarks or logos used on this site are property of their respective owners.</div>
+					<div class="terms"><a href="/legal/terms/">Terms of Service</a><a href="/legal/privacy/">Privacy Policy</a><a href="/legal/cookies/">Cookies Policy</a></div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="https://assets.zorincdn.com/zorin.com/js/responsive-menu.min.js"></script>
+
+	<script src="https://assets.zorincdn.com/zorin.com/vendor/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://assets.zorincdn.com/zorin.com/js/paddle-checkout.min.js"></script>
+	<script>
+		const product = 916787;
+	</script>
+	<script src="https://assets.zorincdn.com/zorin.com/js/paddle-prices.min.js"></script>
+
+	<script>
+	var buttons = document.getElementsByClassName("hidden-no-js");
+	var i;
+	for (i = 0; i < buttons.length; i++) {
+		buttons[i].style.display = "inline-block";
+	}
+	</script>
+
+	<script src="https://assets.zorincdn.com/zorin.com/js/sticky-secondary-nav.min.js"></script>
+
+	<script src="https://assets.zorincdn.com/zorin.com/js/show-alternatives-title-box.min.js"></script>
+
+	<script src="https://assets.zorincdn.com/zorin.com/vendor/medium-zoom/medium-zoom.min.js"></script>
+	<script>
+	mediumZoom('[data-zoomable]', {
+		background: 'rgba(255,255,255,0.925)',
+		margin: 76,
+	})
+	</script>
+
+	<script src="https://assets.zorincdn.com/zorin.com/vendor/swiper/6.8.1/swiper-bundle.min.js"></script>
+	<script>
+	var swiperWallpapers = new Swiper('.wallpapers-swiper-container', {
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev'
+		},
+		slidesPerView: 'auto',
+		centeredSlides: true,
+		grabCursor: true,
+		loop: true
+	});
+
+	var swiperProductivityTop = new Swiper('.productivity-top-swiper-container', {
+		spaceBetween: 0,
+		centeredSlides: true,
+		speed: 11000,
+		autoplay: {
+			delay: 1,
+			disableOnInteraction: false
+		},
+		loop: true,
+		slidesPerView:'auto',
+		allowTouchMove: false
+	});
+	
+	var swiperProductivityBottom = new Swiper('.productivity-bottom-swiper-container', {
+		spaceBetween: 0,
+		centeredSlides: true,
+		speed: 11000,
+		autoplay: {
+			delay: 1,
+			disableOnInteraction: false,
+			reverseDirection: true
+		},
+		loop: true,
+		slidesPerView:'auto',
+		allowTouchMove: false
+	});
+	</script>
 </body>
+
 </html>
