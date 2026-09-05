@@ -3,93 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Space | Explore The Unknown</title>
-    <!-- High-fidelity tailwind utility layer -->
-    <script src="https://tailwindcss.com"></script>
+    <title>Cosmic Space</title>
     <style>
-        html { scroll-behavior: smooth; }
-        /* Animated starfield matrix layer */
-        .star-matrix {
+        /* Base Setup */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { 
+            height: 100%; 
+            background-color: #040614; 
+            color: #f8fafc; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Moving Space Background Loop */
+        .universe {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
             background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
-            background-size: 550px 550px, 350px 350px;
-            background-position: 0 0, 40px 60px;
-            animation: stardust 120s linear infinite;
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.15) 1px, transparent 1px),
+                radial-gradient(circle at 75% 60%, rgba(255,255,255,0.1) 2px, transparent 2px),
+                radial-gradient(circle at 50% 85%, rgba(255,255,255,0.12) 1px, transparent 1px);
+            background-size: 400px 400px;
+            animation: moveStars 90s linear infinite;
         }
-        @keyframes stardust {
-            from { background-position: 0 0, 40px 60px; }
-            to { background-position: 550px 1100px, 40px 760px; }
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 400px 800px; }
         }
-        /* Blur layers simulating gas clouds */
-        .nebula-core {
-            filter: blur(130px);
-            animation: pulse-cosmic 14s infinite alternate ease-in-out;
+
+        /* Glowing Nebula Gas Clouds */
+        .nebula {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 2;
+            opacity: 0.4;
+            animation: drift 15s ease-in-out infinite alternate;
         }
-        @keyframes pulse-cosmic {
-            0% { transform: scale(1) translate(0px, 0px); opacity: 0.3; }
-            100% { transform: scale(1.3) translate(50px, -40px); opacity: 0.5; }
+        .purple { top: -10%; left: -10%; background: #7c3aed; }
+        .cyan { bottom: -10%; right: -10%; background: #06b6d4; animation-delay: -5s; }
+
+        @keyframes drift {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(40px, -40px); }
         }
+
+        /* Layout Framework */
+        .interface {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header { width: 100%; max-w: 1000px; display: flex; justify-content: space-between; font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; color: #94a3b8; }
+        
+        main { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; max-w: 600px; margin: auto; }
+        
+        /* Shifting Vector Text Color */
+        h1 { 
+            font-size: 4rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, #22d3ee, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p { color: #94a3b8; line-height: 1.6; font-size: 1rem; font-weight: 300; }
+
+        /* Cyberpunk Interactive Core Button */
+        button {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #334155;
+            padding: 1rem 2rem;
+            color: #cbd5e1;
+            font-family: monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        button:hover { border-color: #22d3ee; color: #22d3ee; box-shadow: 0 0 15px rgba(34, 211, 238, 0.2); }
+
+        footer { font-size: 0.65rem; font-family: monospace; color: #475569; }
     </style>
 </head>
-<body class="bg-[#040610] overflow-x-hidden relative min-h-screen">
+<body>
 
-    <!-- Deep Space Background Overlays -->
-    <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 star-matrix opacity-40"></div>
-        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full nebula-core"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-500/15 rounded-full nebula-core" style="animation-duration: 20s; animation-direction: alternate-reverse;"></div>
-    </div>
+    <!-- Backplane Elements -->
+    <div class="universe"></div>
+    <div class="nebula purple"></div>
+    <div class="nebula cyan"></div>
 
-    <!-- Main UI Framework -->
-    <div class="relative z-10 min-h-screen flex flex-col justify-between text-slate-200">
-        <header class="w-full max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="text-xs font-black tracking-[0.4em] bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent uppercase">
-                Cosmic Space
-            </div>
-            <span class="text-[10px] font-mono tracking-widest text-slate-500 border border-slate-800 px-3 py-1 rounded-md bg-slate-900/30">v1.0.4</span>
+    <!-- Active Interface -->
+    <div class="interface">
+        <header>
+            <div>Cosmic Space</div>
+            <div style="color:#475569;">v1.0.5</div>
         </header>
 
-        <main class="flex-1 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto py-12">
-            <div class="inline-flex items-center gap-2 px-3 py-1 text-[10px] font-mono text-cyan-400 bg-cyan-500/5 border border-cyan-500/30 rounded-full mb-6 uppercase tracking-widest">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
-                System Live
-            </div>
-
-            <h1 class="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight text-white mb-6 uppercase">
-                Explore The <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-200 to-purple-500">Unknown</span>
-            </h1>
-
-            <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-xl mb-12 font-light tracking-wide leading-relaxed">
-                Live on the web. Clean, fast, and entirely custom. Step into a lightweight engine engineered for optimal performance across the digital expanse.
-            </p>
-
-            <button onclick="launchSequence(this)" class="group relative px-8 py-4 bg-slate-950/40 border border-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-500/80 active:scale-95 shadow-2xl hover:shadow-cyan-500/10">
-                <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span class="relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-slate-300 group-hover:text-cyan-400 transition-colors">
-                    Initialize Sequence
-                </span>
-            </button>
+        <main>
+            <h1 id="title-text">Explore The Unknown</h1>
+            <p>Live on the web. Clean, fast, and entirely custom. Step into a lightweight engine engineered for optimal performance across the digital expanse.</p>
+            <button onclick="engage(this)">Initialize Sequence</button>
         </main>
 
-        <footer class="w-full max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-mono text-slate-600 border-t border-slate-900/60">
-            <p>&copy; 2026 Gideon Riggins. Terminal online.</p>
-            <a href="https://github.com" target="_blank" class="hover:text-slate-400 transition-colors">Repository Master</a>
+        <footer>
+            &copy; 2026 Gideon Riggins. Terminal functional.
         </footer>
     </div>
 
     <script>
-        function launchSequence(element) {
-            const textSpan = element.querySelector('span');
-            textSpan.innerText = "Connecting Link...";
-            textSpan.className = "relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-purple-400 animate-pulse";
+        function engage(element) {
+            element.innerText = "System Loading...";
+            element.style.color = "#a78bfa";
+            element.style.borderColor = "#a78bfa";
             
             setTimeout(() => {
-                textSpan.innerText = "Sequence Active";
-                textSpan.className = "relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-cyan-400";
-                element.classList.add('border-cyan-500', 'bg-cyan-500/5');
-            }, 1500);
+                element.innerText = "Sequence Active";
+                element.style.color = "#4ade80";
+                element.style.borderColor = "#4ade80";
+                document.getElementById('title-text').style.background = "linear-gradient(to right, #4ade80, #22d3ee)";
+                document.getElementById('title-text').style.webkitBackgroundClip = "text";
+            }, 1200);
         }
     </script>
+
 </body>
 </html>
