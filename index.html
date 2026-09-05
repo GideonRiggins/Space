@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Search Engine</title>
     <style>
-        /* Base Setup & Ultra-Minimal Presentation Framework */
+        /* Base Configuration & Premium Presentation Layer */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
             background-color: #03050c;
@@ -23,7 +23,7 @@
             pointer-events: none;
         }
 
-        /* Subtle Frosted Low-Opacity Gas Blobs */
+        /* Ambient Low-Opacity Space Nebula Fields */
         .nebula {
             position: fixed;
             width: 500px;
@@ -87,7 +87,7 @@
             text-align: center;
         }
 
-        /* Minimalist Search Branding Vector Logo */
+        /* Minimalist Search Branding */
         h1 {
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 900;
@@ -103,7 +103,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Glassmorphic Cyber Search Terminal Bar */
+        /* Glassmorphic Active Search Form Input Bar */
         .search-wrapper {
             width: 100%;
             position: relative;
@@ -125,10 +125,9 @@
         .search-bar:focus {
             border-color: #06b6d4;
             background: rgba(15, 23, 42, 0.6);
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15), 0 20px 40px -10px rgba(0,0,0,0.6);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15), 0 20px 40px -10px rgba(0,0,0,0.5);
         }
 
-        /* Magnifying Glass Utility Icon */
         .search-icon {
             position: absolute;
             left: 1.2rem;
@@ -140,30 +139,17 @@
             pointer-events: none;
         }
 
-        /* Filter Switch Row Module */
-        .filter-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .filter-btn {
-            background: rgba(15, 23, 42, 0.3);
-            border: 1px solid rgba(51, 65, 85, 0.3);
-            color: #64748b;
-            padding: 6px 16px;
-            border-radius: 9999px;
+        /* System Interface Badges */
+        .status-badge {
             font-family: monospace;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.2s ease;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            border-color: #06b6d4;
+            font-size: 0.65rem;
             color: #06b6d4;
-            background: rgba(6, 182, 212, 0.05);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            background: rgba(6, 182, 212, 0.02);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
         footer {
@@ -183,7 +169,7 @@
 </head>
 <body>
 
-    <!-- Ambient Animation Layer Backplane -->
+    <!-- Canvas Backplane Layer -->
     <canvas id="starfield"></canvas>
     <div class="nebula purple"></div>
     <div class="nebula cyan"></div>
@@ -191,41 +177,40 @@
 
     <div class="interface-grid">
         <header>
-            <div>Space Search Engine</div>
-            <div style="color: #475569;">Console Live</div>
+            <div>Space Mainframe</div>
+            <div style="color: #475569;">DDG Node Live</div>
         </header>
 
         <main>
-            
-            <form id="searchForm" onsubmit="executeSearch(event)" style="width: 100%; display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+            <!-- Native Native DuckDuckGo Engine Form Wrapper -->
+            <form action="https://duckduckgo.com/" method="get" target="_blank" style="width: 100%; display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
                 
                 <h1>Space<span>.Search</span></h1>
                 
-                <!-- Central Interactive Bar Framework -->
+                <div class="status-badge">Engine Node: DuckDuckGo Privacy Core</div>
+
+                <!-- Input Text Box Field Maps Direct to DDG Param Name "q" -->
                 <div class="search-wrapper">
                     <svg class="search-icon" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
-                    <input type="text" id="queryInput" class="search-bar" placeholder="Scan the data expanse..." autocomplete="off" autofocus>
+                    <input type="text" name="q" class="search-bar" placeholder="Search privately across the cosmos..." autocomplete="off" autofocus required>
                 </div>
 
-                <!-- Engine Filter Presets Switch -->
-                <div class="filter-row">
-                    <button type="button" class="filter-btn active" onclick="setEngine('google', this)">Google</button>
-                    <button type="button" class="filter-btn" onclick="setEngine('images', this)">Images</button>
-                    <button type="button" class="filter-btn" onclick="setEngine('github', this)">GitHub</button>
-                    <button type="button" class="filter-btn" onclick="setEngine('wikipedia', this)">Wikipedia</button>
-                </div>
+                <!-- Hidden Parameter Config Hooks Modifying the DDG Output Style -->
+                <input type="hidden" name="ka" value="h"> <!-- Use Helvetica text metrics -->
+                <input type="hidden" name="kt" value="h"> <!-- Clean design template -->
+                <input type="hidden" name="kh" value="1"> <!-- Safe search parameters lock -->
             </form>
         </main>
 
         <footer>
-            <div>&copy; 2026 GIDEON RIGGINS. ALL RIGHTS RESERVED.</div>
+            <div>&copy; 2026 GIDEON RIGGINS.</div>
             <div><a href="https://github.com" target="_blank">MAIN_NODE.SRC</a></div>
         </footer>
     </div>
 
-    <!-- Background Star Field Motion Logic -->
+    <!-- Active Mouse-Tracking Star Field Loop Logic Script -->
     <script>
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
@@ -280,44 +265,6 @@
             requestAnimationFrame(animate);
         }
         animate();
-
-        // REAL-TIME SEARCH ROUTING LOGIC KEYS
-        let activeEngine = 'google';
-
-        function setEngine(engineKey, buttonElement) {
-            activeEngine = engineKey;
-            
-            // Remove active style state signature from all toggles
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            // Bind active class anchor onto the user selected target
-            buttonElement.classList.add('active');
-
-            // Shift placeholder text vectors seamlessly
-            const input = document.getElementById('queryInput');
-            if(engineKey === 'google') input.placeholder = "Scan the global web data expanse...";
-            if(engineKey === 'images') input.placeholder = "Scan celestial image archives...";
-            if(engineKey === 'github') input.placeholder = "Scan public code repositories...";
-            if(engineKey === 'wikipedia') input.placeholder = "Scan encyclopedic database records...";
-            input.focus();
-        }
-
-        function executeSearch(event) {
-            event.preventDefault();
-            const rawQuery = document.getElementById('queryInput').value.trim();
-            if(!rawQuery) return;
-
-            const targetPayload = encodeURIComponent(rawQuery);
-            let searchURL = '';
-
-            // Map target routing strings based on active mode keys
-            if(activeEngine === 'google') searchURL = `https://google.com{targetPayload}`;
-            if(activeEngine === 'images') searchURL = `https://google.com{targetPayload}`;
-            if(activeEngine === 'github') searchURL = `https://github.com{targetPayload}`;
-            if(activeEngine === 'wikipedia') searchURL = `https://wikipedia.org{targetPayload}`;
-
-            // Open search output array directly onto a clean client target slot
-            window.open(searchURL, '_blank');
-        }
     </script>
 </body>
 </html>
