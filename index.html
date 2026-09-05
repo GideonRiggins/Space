@@ -174,7 +174,7 @@
                         return;
                     }
 
-                    // FIXED: Target the first result node item inside the index array explicitly
+                    // FIXED: Explicitly grab the first dictionary item index from the data results array
                     const location = geoData.results[0];
                     const lat = location.latitude;
                     const lon = location.longitude;
@@ -187,7 +187,10 @@
 
                     return fetch(weatherUrl);
                 })
-                .then(res => res.json())
+                .then(res => {
+                    if (!res) return;
+                    return res.json();
+                })
                 .then(weatherData => {
                     if (!weatherData || !weatherData.current_weather) return;
 
