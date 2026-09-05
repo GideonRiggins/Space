@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gideon Riggins | Photo Engine</title>
+    <title>Gideon Riggins | Photo Archive</title>
     <style>
         /* Modern Setup and Reset Layout Geometry */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            background-color: #090b11;
+            background-color: #05070c;
             color: #f1f5f9;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             min-height: 100vh;
@@ -44,7 +44,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 6px 14px;
             border-radius: 9999px;
-            color: #94a3b8;
+            color: #38bdf8;
+            letter-spacing: 1px;
         }
 
         main {
@@ -68,19 +69,19 @@
         @media (min-width: 1024px) { .photo-gallery { column-count: 4; } }
 
         .photo-card {
-            background: #111420;
+            background: #0e111a;
             border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 16px;
             margin-bottom: 1.5rem;
             break-inside: avoid;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
         }
 
         .photo-card:hover {
             transform: scale(1.02);
-            border-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(56, 189, 248, 0.3);
         }
 
         .photo-card img {
@@ -88,13 +89,13 @@
             height: auto;
             display: block;
             object-fit: cover;
-            background-color: #0e111a; /* Placeholder skeleton color while loading */
+            background-color: #090b11; /* Pre-render skeleton backdrop */
         }
 
         .photo-meta {
             padding: 1rem;
             font-size: 0.8rem;
-            color: #64748b;
+            color: #475569;
             font-family: monospace;
             display: flex;
             justify-content: space-between;
@@ -102,7 +103,7 @@
         }
 
         .photo-tag {
-            color: #e2e8f0;
+            color: #38bdf8;
             font-weight: bold;
         }
 
@@ -113,8 +114,8 @@
             padding: 2rem;
             text-align: center;
             font-size: 0.75rem;
-            color: #334155;
-            border-t: 1px solid rgba(255, 255, 255, 0.05);
+            color: #1e293b;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
@@ -122,48 +123,54 @@
 
     <header>
         <h1>Gideon Riggins / Photo.Archive</h1>
-        <div class="upload-badge">GRID STATUS: OPERATIONAL</div>
+        <div class="upload-badge">ARCHIVE ONLINE</div>
     </header>
 
     <main>
-        <!-- MULTI-COLUMN PHOTO FEED (Populated with premium high-res placeholders) -->
+        <!-- MULTI-COLUMN MASONRY PHOTO FEED -->
         <div class="photo-gallery">
             
+            <!-- CARD 1: CARINA NEBULA -->
             <div class="photo-card">
-                <img src="https://unsplash.com" alt="Cosmic Texture">
-                <div class="photo-meta"><span class="photo-tag">#001_NEBULA</span><span>600x800</span></div>
+                <img src="https://unsplash.com" alt="Deep Cosmic Nebula">
+                <div class="photo-meta"><span class="photo-tag">#001_CARINA</span><span>CELESTIAL</span></div>
             </div>
 
+            <!-- CARD 2: DIGITAL CORE MATRIX -->
             <div class="photo-card">
-                <img src="https://unsplash.com" alt="Digital Matrix Network">
-                <div class="photo-meta"><span class="photo-tag">#002_MATRIX</span><span>600x400</span></div>
+                <img src="https://unsplash.com" alt="Digital Matrix Wireframe">
+                <div class="photo-meta"><span class="photo-tag">#002_MATRIX</span><span>DATA_CELL</span></div>
             </div>
 
+            <!-- CARD 3: CHRONO SWIRL FLUID -->
             <div class="photo-card">
-                <img src="https://unsplash.com" alt="Abstract Fluid Flow">
-                <div class="photo-meta"><span class="photo-tag">#003_FLUID</span><span>600x900</span></div>
+                <img src="https://unsplash.com" alt="Abstract Fluid Flow Texture">
+                <div class="photo-meta"><span class="photo-tag">#003_CHRONO</span><span>ABSTRACT</span></div>
             </div>
 
+            <!-- CARD 4: INFRARED HORIZON -->
             <div class="photo-card">
-                <img src="https://unsplash.com" alt="Cyber Grid Core">
-                <div class="photo-meta"><span class="photo-tag">#004_CIRCUIT</span><span>600x600</span></div>
+                <img src="https://unsplash.com" alt="Infrared Horizon Topography">
+                <div class="photo-meta"><span class="photo-tag">#004_INFRARED</span><span>VECTOR</span></div>
             </div>
 
+            <!-- CARD 5: STELLAR MAGMA -->
             <div class="photo-card">
-                <img src="https://unsplash.com" alt="Satellite View">
-                <div class="photo-meta"><span class="photo-tag">#005_HORIZON</span><span>600x450</span></div>
+                <img src="https://unsplash.com" alt="Stellar Magma Background">
+                <div class="photo-meta"><span class="photo-tag">#005_MAGMA</span><span>THERMAL</span></div>
             </div>
 
+            <!-- CARD 6: CYBER MATRIX CORE -->
             <div class="photo-card">
-                <img src="https://unsplash.com" alt="Gradients Layer">
-                <div class="photo-meta"><span class="photo-tag">#006_VECTOR</span><span>600x750</span></div>
+                <img src="https://unsplash.com" alt="Cyber Wireframe Grid Core">
+                <div class="photo-meta"><span class="photo-tag">#006_CYBER_CORE</span><span>GRID_NODE</span></div>
             </div>
 
         </div>
     </main>
 
     <footer>
-        &copy; 2026 Gideon Riggins. Media storage module loaded.
+        &copy; 2026 Gideon Riggins. Media stream processing stable.
     </footer>
 
 </body>
