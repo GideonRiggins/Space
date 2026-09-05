@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gideon Riggins | Space Search</title>
+    <title>Space | System Engine</title>
     <style>
-        /* Base Architecture Reset and Presentation Setup */
+        /* Base Setup & Premium Presentation Layer */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
             background-color: #03050c;
@@ -22,7 +22,7 @@
             pointer-events: none;
         }
 
-        /* Ambient Low-Opacity Space Nebula Overlays */
+        /* Ambient Low-Opacity Space Nebula Fields */
         .nebula {
             position: fixed;
             width: 500px;
@@ -57,7 +57,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem;
             min-height: 100vh;
         }
 
@@ -206,18 +206,18 @@
     <div class="interface-grid">
         <header>
             <div>Space Mainframe</div>
-            <div style="color: #475569;">API Node Active</div>
+            <div style="color: #475569;">API Core Active</div>
         </header>
 
         <main>
             <h1>Space<span>.Search</span></h1>
             
-            <!-- Real-Time Internal Data Form Handler -->
+            <!-- Custom Internal Query Entry Block -->
             <div class="search-wrapper">
                 <svg class="search-icon" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <input type="text" id="terminalQuery" class="search-bar" placeholder="Query web index indices natively..." autocomplete="off" onkeypress="handleKeyPress(event)" autofocus>
+                <input type="text" id="terminalQuery" class="search-bar" placeholder="Scan the web expanse smoothly..." autocomplete="off" onkeypress="handleKeyPress(event)" autofocus>
             </div>
 
             <!-- ZERO REDIRECT INTERNAL OUTPUT NODE -->
@@ -232,8 +232,8 @@
         </footer>
     </div>
 
+    <!-- Active Mouse-Tracking Star Field Loop Logic Script -->
     <script>
-        // High-Performance Ambient Star Engine
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
         let stars = [];
@@ -288,7 +288,7 @@
         }
         animate();
 
-        // NATIVE STABLE SEARCH API CONNECTIVITY LOOP
+        // NON-REJECTED STABLE SECURE WEB API FEED
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 const queryText = document.getElementById('terminalQuery').value.trim();
@@ -298,43 +298,39 @@
                 const container = document.getElementById('resContainer');
 
                 displayBox.style.display = "block";
-                container.innerHTML = `<div style="font-family:monospace; color:#64748b; text-align:center;">[SYSTEM]: Processing secure query stream for "${queryText}"...</div>`;
+                container.innerHTML = `<div style="font-family:monospace; color:#64748b; text-align:center;">[SYSTEM]: Accessing public ledger index for "${queryText}"...</div>`;
 
-                // Connecting to an unrestricted open web search index that allows direct browser integration
+                // Fetches real web indexing metadata from an open, unblocked global developer index registry
                 const apiUrl = `https://crossref.org{encodeURIComponent(queryText)}&rows=4`;
 
                 fetch(apiUrl)
-                    .then(response => {
-                        if (!response.ok) throw new Error();
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
                         const items = data.message.items;
-                        
                         if(!items || items.length === 0) {
-                            container.innerHTML = `<div style="font-family:monospace; color:#ef4444; text-align:center;">[ALERT]: Zero records found matching active metrics.</div>`;
+                            container.innerHTML = `<div style="font-family:monospace; color:#ef4444; text-align:center;">[ALERT]: Zero record vectors matched your query parameter logs.</div>`;
                             return;
                         }
 
                         container.innerHTML = ""; // Clear loader string
 
-                        // Process incoming array and inject records dynamically without shifting windows
+                        // Dynamically loop and render matching real web links inside your frosted console card
                         items.forEach((item, i) => {
-                            let titleText = item.title ? item.title[0] : "Global Knowledge Node Record";
-                            let urlTarget = item.URL || "#";
-                            let publisherText = item.publisher || "Public Domain Index";
+                            let titleText = item.title ? item.title[0] : "Global Mainframe Resource Log";
+                            let webUrl = item.URL || "#";
+                            let provider = item.publisher || "Open Knowledge Ledger";
 
                             const nodeHtml = `
                                 <div class="search-result-node">
-                                    <a href="${urlTarget}" target="_blank" class="res-link">🔗 ${titleText}</a>
-                                    <div class="res-snippet">Database Source: ${publisherText} | Resource Index Location: ${urlTarget}</div>
+                                    <a href="${webUrl}" target="_blank" class="res-link">🔗 ${titleText}</a>
+                                    <div class="res-snippet">Host Matrix Node: ${provider} | Data Core Link: ${webUrl}</div>
                                 </div>
                             `;
                             container.innerHTML += nodeHtml;
                         });
                     })
                     .catch(() => {
-                        container.innerHTML = `<div style="font-family:monospace; color:#ef4444; text-align:center;">[EXCEPTION]: Network sync error. Query rejected.</div>`;
+                        container.innerHTML = `<div style="font-family:monospace; color:#ef4444; text-align:center;">[EXCEPTION]: Network connection reset. Vector mapping failed.</div>`;
                     });
             }
         }
