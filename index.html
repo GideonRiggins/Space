@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space | Warp Mainframe</title>
+    <title>Space | Quantum Flight Deck</title>
     <style>
-        /* Celestial Base Architecture and Pointer Resets */
+        /* Cockpit Base System Geometry & Reset Restraints */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
-            background-color: #020308;
+            background-color: #010206;
             color: #f1f5f9;
             font-family: monospace;
             position: relative;
@@ -21,33 +21,33 @@
             position: fixed;
             inset: 0;
             z-index: 1;
-            cursor: pointer;
+            cursor: crosshair;
         }
 
-        /* Ambient Low-Opacity Shifting Energy Fields */
+        /* Ambient Cosmic Energy Layers */
         .nebula {
             position: fixed;
-            width: 600px;
-            height: 600px;
+            width: 650px;
+            height: 650px;
             border-radius: 50%;
             filter: blur(160px);
             z-index: 2;
             opacity: 0.12;
             pointer-events: none;
-            transition: opacity 1s, background 1s;
+            transition: opacity 0.8s, background 0.8s;
         }
-        .purple { top: -10%; left: -10%; background: #6d28d9; }
-        .cyan { bottom: -10%; right: -10%; background: #0e7490; }
+        .purple { top: -10%; left: -10%; background: #5b21b6; }
+        .cyan { bottom: -10%; right: -10%; background: #0891b2; }
 
-        /* Tactile HUD Cockpit Frame Texture */
+        /* CRT Terminal Monitor Grid Texture */
         .hud-overlay {
             position: fixed;
             inset: 0;
             z-index: 3;
-            background: linear-gradient(rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+            background: linear-gradient(rgba(15, 23, 42, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(15, 23, 42, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
             background-size: 4px 4px;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.35;
         }
 
         .interface-grid {
@@ -59,7 +59,7 @@
             padding: 2.5rem 1.5rem;
             height: 100vh;
             justify-content: space-between;
-            pointer-events: none; /* Allows mouse clicks to pass directly to canvas background */
+            pointer-events: none; /* Mouse clicks pass directly to flight canvas */
         }
 
         header {
@@ -67,7 +67,7 @@
             max-w: 1100px;
             display: flex;
             justify-content: space-between;
-            color: #334155;
+            color: #223147;
             font-size: 0.75rem;
             letter-spacing: 4px;
             text-transform: uppercase;
@@ -76,11 +76,11 @@
             display: inline-block;
             width: 6px;
             height: 6px;
-            background-color: #22d3ee;
+            background-color: #06b6d4;
             border-radius: 50%;
             margin-right: 6px;
-            box-shadow: 0 0 8px #22d3ee;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 8px #06b6d4;
+            transition: background-color 0.3s;
         }
 
         main {
@@ -93,32 +93,27 @@
             text-align: center;
         }
 
-        /* High-Impact Vector Branding text */
+        /* High-Impact Flight Deck Branding Labels */
         h1 {
-            font-size: clamp(2rem, 7vw, 4.5rem);
+            font-size: clamp(2.2rem, 6vw, 4rem);
             font-weight: 900;
-            letter-spacing: -1px;
+            letter-spacing: 2px;
             color: #ffffff;
             text-transform: uppercase;
-            transition: transform 0.3s ease, letter-spacing 0.5s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 0.5s ease;
         }
         h1 span {
-            color: #22d3ee;
-            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
-            transition: color 0.3s, text-shadow 0.3s;
+            color: #06b6d4;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            transition: color 0.4s, text-shadow 0.4s;
         }
 
-        .instructions {
-            color: #475569;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+        .telemetry-alert {
+            color: #334155;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-top: 1rem;
-            animation: breathe 2s infinite alternate ease-in-out;
-        }
-        @keyframes breathe {
-            0% { opacity: 0.4; }
-            100% { opacity: 0.9; }
+            margin-top: 0.5rem;
         }
 
         footer {
@@ -128,12 +123,13 @@
             justify-content: space-between;
             font-size: 0.65rem;
             color: #1e293b;
+            letter-spacing: 1.5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Canvas Processing Module -->
+    <!-- Quantum Vector Canvas Backplane -->
     <canvas id="starfield"></canvas>
     <div id="neb-p" class="nebula purple"></div>
     <div id="neb-c" class="nebula cyan"></div>
@@ -141,18 +137,18 @@
 
     <div class="interface-grid">
         <header>
-            <div>Gideon Riggins</div>
-            <div><span class="live-dot" id="status-dot"></span><span id="status-text">WARP.READY</span></div>
+            <div>GIDEON RIGGINS</div>
+            <div><span class="live-dot" id="status-dot"></span><span id="status-text">ENGINES.STANDBY</span></div>
         </header>
 
         <main>
-            <h1 id="main-title">Gideon<span>.Space</span></h1>
-            <div class="instructions" id="instruction-prompt">CLICK AND HOLD MOUSE TO ENGAGE WARP</div>
+            <h1 id="main-title">QUANTUM<span>.LAUNCHER</span></h1>
+            <div class="telemetry-alert" id="instruction-prompt">HOLD MOUSE TO INJECT QUANTUM OVERDRIVE</div>
         </main>
 
         <footer>
-            <div>&copy; 2026 RIGGINS. ALL ENGINE CONTROLS ACTIVE.</div>
-            <div>SILENT_DECK_V2</div>
+            <div>THRUST MATRIX: RESPONSIVE</div>
+            <div>SYS_DECK_V3</div>
         </footer>
     </div>
 
@@ -160,107 +156,130 @@
     <script>
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
+        
         let stars = [];
-        const numStars = 200; // Increased star density for high-fidelity velocity effects
+        const numStars = 350; // Increased star matrix capacity for extreme density depth
         
         let isWarping = false;
         let warpFactor = 1;
         let targetWarpFactor = 1;
         
-        let mouse = { x: 0, y: 0 };
+        // Flight vector coordinate positions tracking
+        let mouse = { x: 0, y: 0, currentX: 0, currentY: 0 };
 
         function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            // Re-center origin vectors to center of screen layout
-            ctx.translate(canvas.width / 2, canvas.height / 2);
         }
         window.addEventListener('resize', resize);
         resize();
 
-        // Populate Starfield Vectors relative to center origin points
+        // Populate Coordinate Field relative to dynamic scaling boundaries
         for (let i = 0; i < numStars; i++) {
             stars.push({
-                x: (Math.random() - 0.5) * canvas.width,
-                y: (Math.random() - 0.5) * canvas.height,
-                z: Math.random() * canvas.width, // Depth axis variable mapping
-                color: '#ffffff'
+                x: (Math.random() - 0.5) * 3000,
+                y: (Math.random() - 0.5) * 3000,
+                z: Math.random() * 2000,
+                size: Math.random() * 1.5 + 0.5
             });
         }
 
-        // Mouse Trajectory Tracking
+        // Steerable Horizon Coordinate Tracking
         window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX - canvas.width / 2;
-            mouse.y = e.clientY - canvas.height / 2;
+            mouse.x = e.clientX - window.innerWidth / 2;
+            mouse.y = e.clientY - window.innerHeight / 2;
         });
 
-        // Trigger Hyperspace Overdrive on Click Hold
+        // Trigger Extreme Velocity on Hold Click
         window.addEventListener('mousedown', () => {
             isWarping = true;
-            targetWarpFactor = 35; // Light speed acceleration vector caps
-            document.getElementById('status-text').innerText = "WARP.ACTIVE";
-            document.getElementById('status-dot').style.backgroundColor = "#ff0055"; // Hot pink engine state
-            document.getElementById('status-dot').style.boxShadow = "0 0 12px #ff0055";
-            document.getElementById('instruction-prompt').innerText = "DISENGAGE MOUSE TO DECELLERATE";
-            document.getElementById('main-title').style.transform = "scale(0.95)";
-            document.getElementById('main-title').style.letterSpacing = "6px";
+            targetWarpFactor = 45; // Enhanced maximum terminal speed cap
+            document.getElementById('status-text').innerText = "OVERDRIVE.ACTIVE";
+            document.getElementById('status-text').style.color = "#f43f5e";
+            document.getElementById('status-dot').style.backgroundColor = "#f43f5e"; // Red alert critical speed signal
+            document.getElementById('status-dot').style.boxShadow = "0 0 15px #f43f5e";
+            document.getElementById('instruction-prompt').innerText = "DISENGAGE BUTTON TO STABILIZE MATRIX";
+            document.getElementById('instruction-prompt').style.color = "#f43f5e";
+            
+            document.getElementById('main-title').style.transform = "scale(0.96)";
+            document.getElementById('main-title').style.letterSpacing = "8px";
         });
 
         window.addEventListener('mouseup', () => {
             isWarping = false;
-            targetWarpFactor = 1; // Return to standard orbit values
-            document.getElementById('status-text').innerText = "WARP.READY";
-            document.getElementById('status-dot').style.backgroundColor = "#22d3ee";
-            document.getElementById('status-dot').style.boxShadow = "0 0 8px #22d3ee";
-            document.getElementById('instruction-prompt').innerText = "CLICK AND HOLD MOUSE TO ENGAGE WARP";
+            targetWarpFactor = 1;
+            document.getElementById('status-text').innerText = "ENGINES.STANDBY";
+            document.getElementById('status-text').style.color = "#94a3b8";
+            document.getElementById('status-dot').style.backgroundColor = "#06b6d4";
+            document.getElementById('status-dot').style.boxShadow = "0 0 8px #06b6d4";
+            document.getElementById('instruction-prompt').innerText = "HOLD MOUSE TO INJECT QUANTUM OVERDRIVE";
+            document.getElementById('instruction-prompt').style.color = "#334155";
+            
             document.getElementById('main-title').style.transform = "scale(1)";
-            document.getElementById('main-title').style.letterSpacing = "-1px";
+            document.getElementById('main-title').style.letterSpacing = "2px";
         });
 
         function animate() {
-            // Apply slight alpha wipe background transparency loop to generate vector drag line streaks
-            ctx.fillStyle = `rgba(2, 3, 8, ${isWarping ? 0.15 : 0.4})`;
-            ctx.fillRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+            // Slower background wipe context creates a long, elegant fading particle trail matrix
+            ctx.fillStyle = `rgba(1, 2, 6, ${isWarping ? 0.08 : 0.35})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Smoothly interpolate warp factor value shifts
-            warpFactor += (targetWarpFactor - warpFactor) * 0.05;
+            // Interpolate dynamic speed variables smoothly
+            warpFactor += (targetWarpFactor - warpFactor) * 0.04;
+
+            // Interpolate steerable mouse vector positions smoothly (magnetic delay loop)
+            mouse.currentX += (mouse.x - mouse.currentX) * 0.05;
+            mouse.currentY += (mouse.y - mouse.currentY) * 0.05;
+
+            // Translate grid canvas framework relative to center point origin
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
 
             stars.forEach(star => {
-                // Accelerate star tracking forward along the Z depth plane
+                // Pull coordinate depth forward relative to speed multiplayers
                 star.z -= warpFactor;
 
-                // Loop star fields forward if coordinate boundaries are exceeded
+                // Infinite loop grid recycle markers
                 if (star.z <= 0) {
-                    star.z = canvas.width;
-                    star.x = (Math.random() - 0.5) * canvas.width;
-                    star.y = (Math.random() - 0.5) * canvas.height;
+                    star.z = 2000;
+                    star.x = (Math.random() - 0.5) * 3000;
+                    star.y = (Math.random() - 0.5) * 3000;
                 }
 
-                // Standard projection screen perspective translations (X/Z, Y/Z math models)
-                let px = (star.x / star.z) * (canvas.width * 0.6);
-                let py = (star.y / star.z) * (canvas.height * 0.6);
+                // 3D Viewport Horizon Offset Matrix calculations (Incorporates steerable mouse controls)
+                let px = ((star.x - mouse.currentX * 0.3) / star.z) * (canvas.width * 0.8);
+                let py = ((star.y - mouse.currentY * 0.3) / star.z) * (canvas.height * 0.8);
 
-                // Draw secondary trailing lines if light speed factor acceleration is active
-                let prevZ = star.z + warpFactor * 1.5;
-                let p_px = (star.x / prevZ) * (canvas.width * 0.6);
-                let p_py = (star.y / prevZ) * (canvas.height * 0.6);
+                // Tracking back-reference position arrays to drop fading tail vectors
+                let prevZ = star.z + warpFactor * (isWarping ? 1.8 : 1.2);
+                let p_px = ((star.x - mouse.currentX * 0.3) / prevZ) * (canvas.width * 0.8);
+                let p_py = ((star.y - mouse.currentY * 0.3) / prevZ) * (canvas.height * 0.8);
 
                 ctx.beginPath();
                 if (isWarping) {
-                    // Streaking Neon Light Vectors Configuration
-                    ctx.strokeStyle = `rgba(34, 211, 230, ${Math.min(1, 1 - star.z / canvas.width)})`;
-                    ctx.lineWidth = Math.min(2, (1 - star.z / canvas.width) * 3);
+                    // Extreme Velocity Electric Cyan Rays
+                    ctx.strokeStyle = `rgba(6, 182, 212, ${Math.min(1, 1 - star.z / 2000)})`;
+                    ctx.lineWidth = star.size * (1 - star.z / 2000) * 2;
                     ctx.moveTo(px, py);
                     ctx.lineTo(p_px, p_py);
                     ctx.stroke();
                 } else {
-                    // Standard Ambient Point Matrix Configuration
-                    ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, 1 - star.z / canvas.width)})`;
-                    ctx.arc(px, py, Math.min(1.5, (1 - star.z / canvas.width) * 2), 0, Math.PI * 2);
+                    // Ambient Point Stars
+                    ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, 1 - star.z / 2000)})`;
+                    ctx.arc(px, py, star.size * (1 - star.z / 2000), 0, Math.PI * 2);
                     ctx.fill();
                 }
             });
 
+            // 🎯 DRAW FLOATING VECTOR HUD TARGET CROSSHAIR IN CENTER
+            ctx.beginPath();
+            ctx.strokeStyle = isWarping ? "rgba(244, 63, 94, 0.4)" : "rgba(6, 182, 212, 0.25)";
+            ctx.lineWidth = 1;
+            // Draw crosshair ring tracking cursor movements smoothly
+            ctx.arc(mouse.currentX * 0.08, mouse.currentY * 0.08, isWarping ? 40 : 25, 0, Math.PI * 2);
+            ctx.stroke();
+
+            ctx.restore();
             requestAnimationFrame(animate);
         }
         animate();
