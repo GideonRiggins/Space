@@ -4,104 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmic Space</title>
-    <!-- We inject standard Tailwind CSS via script backup -->
-    <script src="https://tailwindcss.com"></script>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #040614 !important;
-            overflow: hidden;
-        }
-        /* Moving starfield layer */
-        .stars {
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
-            background-size: 550px 550px, 350px 350px;
-            background-position: 0 0, 40px 60px;
-            animation: move-stars 100s linear infinite;
-        }
-        @keyframes move-stars {
-            from { background-position: 0 0, 40px 60px; }
-            to { background-position: 550px 1100px, 40px 760px; }
-        }
-        /* Cosmic nebula background core clouds */
-        .nebula {
-            filter: blur(130px);
-            animation: wander 14s infinite alternate ease-in-out;
-        }
-        @keyframes wander {
-            0% { transform: scale(1) translate(0px, 0px); opacity: 0.3; }
-            100% { transform: scale(1.2) translate(40px, -40px); opacity: 0.5; }
-        }
-    </style>
 </head>
-<body class="bg-[#040610] text-slate-100 font-sans antialiased overflow-hidden relative min-h-screen">
+<body style="margin: 0; padding: 0; background-color: #05070f; color: #f8fafc; font-family: sans-serif; display: flex; flex-direction: column; justify-content: space-between; min-h: 100vh; height: 100vh; text-align: center;">
 
-    <!-- Guaranteed Dark Cosmic Background Engine Layout -->
-    <div class="absolute inset-0 z-0 bg-[#040610]" style="background-color: #040610;">
-        <div class="absolute inset-0 stars opacity-50"></div>
-        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full nebula"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-500/15 rounded-full nebula" style="animation-duration: 20s; animation-direction: alternate-reverse;"></div>
-    </div>
+    <!-- Top Row Header -->
+    <header style="padding: 20px; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #22d3ee;">
+        Cosmic Space
+    </header>
 
-    <!-- Active Interface Presentation Frame -->
-    <div class="relative z-10 min-h-screen flex flex-col justify-between text-slate-200" style="min-h: 100vh;">
+    <!-- Center Interactive Content -->
+    <main style="max-w: 500px; margin: auto; padding: 20px;">
+        <h1 style="font-size: 3.5rem; text-transform: uppercase; margin-bottom: 10px; color: #ffffff;">Explore The Unknown</h1>
+        <p style="color: #94a3b8; line-height: 1.6; margin-bottom: 30px;">Live on the web. Clean, fast, and entirely custom.</p>
         
-        <!-- Top Navbar Row -->
-        <header class="w-full max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="text-xs font-black tracking-[0.4em] bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent uppercase font-mono">
-                Cosmic Space
-            </div>
-            <span class="text-[10px] font-mono tracking-widest text-slate-500 border border-slate-800 px-3 py-1 rounded bg-slate-900/40">v1.0.6</span>
-        </header>
+        <button onclick="this.innerText='Sequence Active'; this.style.color='#4ade80'; this.style.borderColor='#4ade80';" style="background: transparent; border: 1px solid #334155; padding: 15px 30px; color: #cbd5e1; font-family: monospace; font-size: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px;">
+            Initialize Sequence
+        </button>
+    </main>
 
-        <!-- Center Arena Display Hero -->
-        <main class="flex-1 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto py-12">
-            <div class="inline-flex items-center gap-2 px-3 py-1 text-[10px] font-mono text-cyan-400 bg-cyan-500/5 border border-cyan-500/30 rounded-full mb-6 uppercase tracking-widest">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
-                System Link Operational
-            </div>
+    <!-- Bottom Status Bar -->
+    <footer style="padding: 20px; font-size: 10px; font-family: monospace; color: #475569; border-top: 1px solid #0f172a;">
+        &copy; 2026 Gideon Riggins. All systems operational.
+    </footer>
 
-            <h1 id="title-text" class="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight text-white mb-6 uppercase" style="color: #ffffff; font-weight: 800; font-size: 3.5rem;">
-                Explore The <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-200 to-purple-400">Unknown</span>
-            </h1>
-
-            <p class="text-slate-400 text-sm sm:text-base max-w-xl mb-12 font-light tracking-wide leading-relaxed" style="color: #94a3b8; max-w: 500px; margin-bottom: 2rem;">
-                Live on the web. Clean, fast, and entirely custom. Step into a lightweight engine engineered for optimal performance across the digital expanse.
-            </p>
-
-            <!-- Command Core Activation Trigger -->
-            <button onclick="launchSequence(this)" class="group relative px-8 py-4 bg-slate-950/60 border border-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-500/80 active:scale-95 shadow-2xl hover:shadow-cyan-500/10" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid #334155; padding: 12px 24px; border-radius: 8px; color: #cbd5e1; font-family: monospace; font-size: 11px; cursor: pointer; letter-spacing: 2px;">
-                <span class="relative z-10 uppercase tracking-[0.2em]">
-                    Initialize Sequence
-                </span>
-            </button>
-        </main>
-
-        <!-- Bottom Interface Status Footer -->
-        <footer class="w-full max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-mono text-slate-600 border-t border-slate-900/60">
-            <p>&copy; 2026 Gideon Riggins. Terminal online.</p>
-            <a href="https://github.com" target="_blank" style="color: #475569; text-decoration: none;" class="hover:text-slate-400">Repository Master</a>
-        </footer>
-    </div>
-
-    <!-- Active State Script Manager Engine -->
-    <script>
-        function launchSequence(element) {
-            const textSpan = element.querySelector('span');
-            textSpan.innerText = "Connecting Link...";
-            textSpan.style.color = "#c084fc";
-            
-            setTimeout(() => {
-                textSpan.innerText = "Sequence Active";
-                textSpan.style.color = "#4ade80";
-                element.style.borderColor = "#4ade80";
-                element.style.backgroundColor = "rgba(74, 222, 128, 0.05)";
-            }, 1200);
-        }
-    </script>
 </body>
 </html>
