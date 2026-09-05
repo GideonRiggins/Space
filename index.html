@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gideon Riggins | Cyber Grid</title>
+    <title>Gideon Riggins | AI Grid</title>
     <style>
         /* Core System Matrix and Interface Display Reset */
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,7 +37,7 @@
         .purple { top: -10%; left: -10%; background: #6d28d9; }
         .cyan { bottom: -10%; right: -10%; background: #0e7490; }
 
-        /* Retro CRT HUD Monitor Monitor Scanlines */
+        /* Retro CRT HUD Monitor Scanlines */
         .hud-overlay {
             position: fixed;
             inset: 0;
@@ -87,7 +87,6 @@
             margin: auto;
         }
 
-        /* High-fidelity Game Status Header text */
         #status-display {
             font-size: 1.2rem;
             letter-spacing: 2px;
@@ -111,7 +110,6 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
-        /* Individual Board Cell Switches */
         .cell-btn {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid #1e293b;
@@ -134,7 +132,6 @@
         .cell-btn.x-mark { color: #22d3ee; text-shadow: 0 0 15px rgba(34, 211, 238, 0.5); }
         .cell-btn.o-mark { color: #c084fc; text-shadow: 0 0 15px rgba(192, 132, 252, 0.5); }
 
-        /* Mechanical Reset Controller Button */
         .reset-btn {
             background: transparent;
             border: 1px solid #1e293b;
@@ -176,13 +173,13 @@
 
     <div class="interface-grid">
         <header>
-            <div>GIDEON_GRID_ENGINE</div>
+            <div>GIDEON_AI_GRID</div>
             <div><span class="live-dot" id="sys-dot"></span>SYS.STANDBY</div>
         </header>
 
         <main>
             <!-- Matrix Turn Status Logger Block -->
-            <div id="status-display">Player X's Turn</div>
+            <div id="status-display">Your Turn (X)</div>
 
             <!-- Active 3x3 Input Nodes -->
             <div class="tic-tac-grid">
@@ -197,12 +194,12 @@
                 <button class="cell-btn" data-index="8" onclick="cellClicked(this)"></button>
             </div>
 
-            <button class="reset-btn" onclick="clearGridEngine()">Reset Game Matrix</button>
+            <button class="reset-btn" onclick="clearGridEngine()">Reset Board</button>
         </main>
 
         <footer>
-            <div>&copy; 2026 RIGGINS. APPLICATION_LAYER.</div>
-            <div>SEC_GRID</div>
+            <div>&copy; 2026 RIGGINS. INTEL_LAYER.</div>
+            <div>SEC_GRID_AI</div>
         </footer>
     </div>
 
@@ -262,8 +259,7 @@
         }
         animate();
 
-        // GAME LOGIC CORE PLATFORM
-        let currentPlayer = "X";
+        // GAME LOGIC CORE WITH INTEL AUTO-COUNTER
         let gameState = ["", "", "", "", "", "", "", "", ""];
         let isGameActive = true;
         const statusDisplay = document.getElementById('status-display');
@@ -271,69 +267,125 @@
         const nebC = document.getElementById('neb-c');
         const sysDot = document.getElementById('sys-dot');
 
-        const winPatterns = [, [3, 4, 5], [6, 7, 8], // Horizontal rows, [1, 4, 7], [2, 5, 8], // Vertical columns, [2, 4, 6]             // Diagonals
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontals
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Verticals
+            [0, 4, 8], [2, 4, 6]             // Diagonals
         ];
 
         function cellClicked(cell) {
             const index = cell.getAttribute('data-index');
 
-            if (gameState[index] !== "" || !isGameActive) return;
+            // Block clicks if square is taken or if it is the AI's turn
+            if (gameState[index] !== "" || !isGameActive || statusDisplay.innerText === "AI Thinking...") return;
 
-            gameState[index] = currentPlayer;
-            cell.innerText = currentPlayer;
-            cell.classList.add(currentPlayer === "X" ? "x-mark" : "o-mark");
+            // Player moves (X)
+            gameState[index] = "X";
+            cell.innerText = "X";
+            cell.classList.add("x-mark");
 
-            checkResult();
+            if (checkResult("X")) return;
+
+            // Trigger silent AI counter-step delay
+            statusDisplay.innerText = "AI Thinking...";
+            setTimeout(executeAIMove, 450);
         }
 
-        function checkResult() {
+        function executeAIMove() {
+            if (!isGameActive) return;
+
+            // Find all available blank index entries
+            let emptyIndices = [];
+            for (let i = 0; i < gameState.length; i++) {
+                if (gameState[i] === "") emptyIndices.push(i);
+            }
+
+            if (emptyIndices.length === 0) return;
+
+            // Simple Smart AI choice matching: Checks if it can win or block player first
+            let chosenIndex = -1;
+
+            // 1. Can AI win on this step?
+            chosenIndex = findStrategicMove("O");
+            
+            // 2. If not, does it need to block the player?
+            if (chosenIndex === -1) {
+                chosenIndex = findStrategicMove("X");
+            }
+
+            // 3. Fallback to a random cell if no blocks/wins are present
+            if (chosenIndex === -1) {
+                const randomIndex = Math.floor(Math.random() * emptyIndices.length);
+                chosenIndex = emptyIndices[randomIndex];
+            }
+
+            // Apply AI mark (O)
+            gameState[chosenIndex] = "O";
+            const targetCell = document.querySelector(`[data-index="${chosenIndex}"]`);
+            targetCell.innerText = "O";
+            targetCell.classList.add("o-mark");
+
+            if (checkResult("O")) return;
+
+            statusDisplay.innerText = "Your Turn (X)";
+        }
+
+        function findStrategicMove(playerMark) {
+            for (let i = 0; i < winPatterns.length; i++) {
+                const [a, b, c] = winPatterns[i];
+                if (gameState[a] === playerMark && gameState[b] === playerMark && gameState[c] === "") return c;
+                if (gameState[a] === playerMark && gameState[c] === playerMark && gameState[b] === "") return b;
+                if (gameState[b] === playerMark && gameState[c] === playerMark && gameState[a] === "") return a;
+            }
+            return -1;
+        }
+
+        function checkResult(player) {
             let roundWon = false;
 
             for (let i = 0; i < winPatterns.length; i++) {
-                const condition = winPatterns[i];
-                let a = gameState[condition[0]];
-                let b = gameState[condition[1]];
-                let c = gameState[condition[2]];
-
-                if (a === "" || b === "" || c === "") continue;
-                if (a === b && b === c) {
+                const [a, b, c] = winPatterns[i];
+                if (gameState[a] === player && gameState[b] === player && gameState[c] === player) {
                     roundWon = true;
                     break;
                 }
             }
 
             if (roundWon) {
-                statusDisplay.innerText = `Player ${currentPlayer} Wins!`;
-                statusDisplay.style.color = "#4ade80"; // Bright Green
-                sysDot.style.backgroundColor = "#4ade80";
-                sysDot.style.boxShadow = "0 0 8px #4ade80";
-                
-                // Shift background nebulas to green celebration state
-                nebP.style.background = "#15803d";
-                nebC.style.background = "#14532d";
-                
+                if (player === "X") {
+                    statusDisplay.innerText = "Victory! You Beat The AI!";
+                    statusDisplay.style.color = "#4ade80"; // Emerald Green Success
+                    sysDot.style.backgroundColor = "#4ade80";
+                    sysDot.style.boxShadow = "0 0 8px #4ade80";
+                    nebP.style.background = "#15803d";
+                    nebC.style.background = "#14532d";
+                } else {
+                    statusDisplay.innerText = "AI System Defeated You!";
+                    statusDisplay.style.color = "#f87171"; // Coral Red Alert
+                    sysDot.style.backgroundColor = "#f87171";
+                    sysDot.style.boxShadow = "0 0 8px #f87171";
+                    nebP.style.background = "#991b1b";
+                    nebC.style.background = "#7f1d1d";
+                }
                 isGameActive = false;
-                return;
+                return true;
             }
 
             if (!gameState.includes("")) {
                 statusDisplay.innerText = "Matrix Lock: Draw!";
                 statusDisplay.style.color = "#94a3b8";
                 isGameActive = false;
-                return;
+                return true;
             }
 
-            // Switch to opposite target player array lock
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
-            statusDisplay.innerText = `Player ${currentPlayer}'s Turn`;
+            return false;
         }
 
         function clearGridEngine() {
-            currentPlayer = "X";
             gameState = ["", "", "", "", "", "", "", "", ""];
             isGameActive = true;
             
-            statusDisplay.innerText = "Player X's Turn";
+            statusDisplay.innerText = "Your Turn (X)";
             statusDisplay.style.color = "#22d3ee";
             sysDot.style.backgroundColor = "#22d3ee";
             sysDot.style.boxShadow = "0 0 8px #22d3ee";
