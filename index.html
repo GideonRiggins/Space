@@ -1,95 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Space | Explore The Unknown</title>
-    <!-- Tailwind CSS for high-fidelity styling -->
-    <script src="https://tailwindcss.com"></script>
-    <style>
-        /* Smooth celestial background glow animations */
-        .cosmic-nebula {
-            filter: blur(140px);
-            animation: drift 15s infinite alternate ease-in-out;
-        }
-        @keyframes drift {
-            0% { transform: scale(1) translate(0px, 0px); opacity: 0.3; }
-            100% { transform: scale(1.3) translate(40px, -60px); opacity: 0.5; }
-        }
-    </style>
-</head>
-<body class="bg-[#05070f] text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-black overflow-x-hidden relative min-h-screen flex flex-col justify-between">
+<!-- === SECTION 1: PASTE INSIDE YOUR HEAD TAG === -->
+<title>Cosmic Space | Explore The Unknown</title>
+<!-- High-fidelity tailwind utility layer -->
+<script src="https://tailwindcss.com"></script>
+<style>
+    html { scroll-behavior: smooth; }
+    /* Animated starfield matrix layer */
+    .star-matrix {
+        background-image: 
+            radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+            radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
+        background-size: 550px 550px, 350px 350px;
+        background-position: 0 0, 40px 60px;
+        animation: stardust 120s linear infinite;
+    }
+    @keyframes stardust {
+        from { background-position: 0 0, 40px 60px; }
+        to { background-position: 550px 1100px, 40px 760px; }
+    }
+    /* Blur layers simulating gas clouds */
+    .nebula-core {
+        filter: blur(130px);
+        animation: pulse-cosmic 14s infinite alternate ease-in-out;
+    }
+    @keyframes pulse-cosmic {
+        0% { transform: scale(1) translate(0px, 0px); opacity: 0.3; }
+        100% { transform: scale(1.3) translate(50px, -40px); opacity: 0.5; }
+    }
+</style>
+<!-- ============================================ -->
+<!-- === SECTION 2: PASTE INSIDE YOUR BODY TAG === -->
+<div class="absolute inset-0 z-0 bg-[#040610] overflow-hidden">
+    <!-- Starfield backplane -->
+    <div class="absolute inset-0 star-matrix opacity-40"></div>
+    <!-- Nebula cores -->
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full nebula-core"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-500/15 rounded-full nebula-core" style="animation-duration: 20s; animation-direction: alternate-reverse;"></div>
+</div>
 
-    <!-- Deep Space Ambient Effects -->
-    <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-purple-900/20 rounded-full cosmic-nebula pointer-events-none z-0"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-cyan-900/20 rounded-full cosmic-nebula pointer-events-none z-0" style="animation-duration: 20s; animation-direction: alternate-reverse;"></div>
-
-    <!-- Minimalist Global Header -->
-    <header class="w-full max-w-6xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
-        <div class="text-sm font-bold tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-cyan-400 to-purple-400 uppercase">
+<!-- Main User Interface Layout Wrapper -->
+<div class="relative z-10 min-h-screen flex flex-col justify-between text-slate-200">
+    <!-- Header Block -->
+    <header class="w-full max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="text-xs font-black tracking-[0.4em] bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent uppercase">
             Cosmic Space
         </div>
-        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-slate-800 to-transparent mx-8 hidden sm:block"></div>
-        <span class="text-[10px] font-mono tracking-widest text-slate-500 uppercase">System: Live</span>
+        <span class="text-[10px] font-mono tracking-widest text-slate-500 border border-slate-800 px-3 py-1 rounded-md bg-slate-900/30">v1.0.4</span>
     </header>
 
-    <!-- Main Exploration Content -->
-    <main class="flex-1 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto relative z-10 py-12">
-        
-        <!-- Status Indicator Pin -->
-        <div class="inline-flex items-center gap-2 px-3 py-1 text-[11px] font-mono text-cyan-400 bg-cyan-500/5 border border-cyan-500/20 rounded-full mb-8 uppercase tracking-widest">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-            Telemetry Online
+    <!-- Centered Hero Arena -->
+    <main class="flex-1 flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto py-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 text-[10px] font-mono text-cyan-400 bg-cyan-500/5 border border-cyan-500/30 rounded-full mb-6 uppercase tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+            System Live
         </div>
 
-        <!-- Hero Headline -->
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white mb-6 uppercase leading-none">
-            Explore The <span class="text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-500">Unknown</span>
+        <h1 class="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight text-white mb-6 uppercase">
+            Explore The <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-200 to-purple-500">Unknown</span>
         </h1>
 
-        <!-- Subtitle Context -->
-        <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-xl mb-12 font-light leading-relaxed tracking-wide">
+        <p class="text-slate-400 text-sm sm:text-base md:text-lg max-w-xl mb-12 font-light tracking-wide leading-relaxed">
             Live on the web. Clean, fast, and entirely custom. Step into a lightweight engine engineered for optimal performance across the digital expanse.
         </p>
 
-        <!-- Dynamic Launch Action -->
-        <button onclick="initializeSequence()" class="group relative px-8 py-4 bg-transparent border border-slate-700/80 rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-400 active:scale-95 shadow-2xl">
-            <!-- Glow background element on hover -->
+        <!-- Command Module Trigger -->
+        <button onclick="launchSequence(this)" class="group relative px-8 py-4 bg-slate-950/40 border border-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:border-cyan-500/80 active:scale-95 shadow-2xl hover:shadow-cyan-500/10">
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
-            <span id="button-text" class="relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-slate-300 group-hover:text-cyan-400 transition-colors">
+            <span class="relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-slate-300 group-hover:text-cyan-400 transition-colors">
                 Initialize Sequence
             </span>
         </button>
-
     </main>
 
-    <!-- Global Interface Footer -->
-    <footer class="w-full max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-slate-600 relative z-10 border-t border-slate-900/50">
-        <p>&copy; 2026 Gideon Riggins. Sector 0-1.</p>
-        <div class="flex gap-6">
-            <a href="https://github.com" target="_blank" class="hover:text-slate-400 transition-colors">Source Code</a>
-            <span class="text-slate-800">|</span>
-            <span class="text-slate-500">v1.0.0</span>
-        </div>
+    <!-- Global Footer -->
+    <footer class="w-full max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-mono text-slate-600 border-t border-slate-900/60">
+        <p>&copy; 2026 Gideon Riggins. Terminal online.</p>
+        <a href="https://github.com" target="_blank" class="hover:text-slate-400 transition-colors">Repository Master</a>
     </footer>
+</div>
 
-    <!-- Interactive Script Layer -->
-    <script>
-        function initializeSequence() {
-            const btnText = document.getElementById('button-text');
-            btnText.innerText = "System Loading...";
-            btnText.classList.add('text-purple-400');
-            
-            // Console feedback simulation
-            console.log("Space sequence initialized successfully.");
-            
-            setTimeout(() => {
-                btnText.innerText = "Sequence Active";
-                btnText.className = "relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-emerald-400";
-            }, 1200);
-        }
-    </script>
-
-</body>
-</html>
+<!-- Interactive Engine Handler -->
+<script>
+    function launchSequence(element) {
+        const textSpan = element.querySelector('span');
+        textSpan.innerText = "Connecting Link...";
+        textSpan.className = "relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-purple-400 animate-pulse";
+        
+        setTimeout(() => {
+            textSpan.innerText = "Sequence Active";
+            textSpan.className = "relative z-10 text-xs font-mono font-semibold uppercase tracking-[0.2em] text-cyan-400";
+            element.classList.add('border-cyan-500', 'bg-cyan-500/5');
+        }, 1500);
+    }
+</script>
+<!-- ============================================ -->
