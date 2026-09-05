@@ -3,51 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space | Entertainment Mainframe</title>
+    <title>Space | Warp Mainframe</title>
     <style>
+        /* Celestial Base Architecture and Pointer Resets */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
-            background-color: #03050c;
+            background-color: #020308;
             color: #f1f5f9;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: monospace;
             position: relative;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
+            user-select: none;
         }
 
         #starfield {
             position: fixed;
             inset: 0;
             z-index: 1;
-            pointer-events: none;
+            cursor: pointer;
         }
 
+        /* Ambient Low-Opacity Shifting Energy Fields */
         .nebula {
             position: fixed;
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            filter: blur(150px);
+            filter: blur(160px);
             z-index: 2;
             opacity: 0.12;
-            animation: cosmicDrift 25s infinite alternate ease-in-out;
+            pointer-events: none;
+            transition: opacity 1s, background 1s;
         }
-        .purple { top: -10%; left: -10%; background: #6366f1; }
-        .cyan { bottom: -10%; right: -10%; background: #06b6d4; animation-duration: 35s; }
+        .purple { top: -10%; left: -10%; background: #6d28d9; }
+        .cyan { bottom: -10%; right: -10%; background: #0e7490; }
 
-        @keyframes cosmicDrift {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.2) translate(40px, -40px); }
-        }
-
+        /* Tactile HUD Cockpit Frame Texture */
         .hud-overlay {
             position: fixed;
             inset: 0;
             z-index: 3;
-            background: linear-gradient(rgba(15, 23, 42, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(15, 23, 42, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background: linear-gradient(rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
             background-size: 4px 4px;
             pointer-events: none;
-            opacity: 0.2;
+            opacity: 0.3;
         }
 
         .interface-grid {
@@ -56,20 +56,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 3rem 1.5rem;
-            min-height: 100vh;
+            padding: 2.5rem 1.5rem;
+            height: 100vh;
+            justify-content: space-between;
+            pointer-events: none; /* Allows mouse clicks to pass directly to canvas background */
         }
 
         header {
             width: 100%;
-            max-width: 1100px;
+            max-w: 1100px;
             display: flex;
             justify-content: space-between;
-            font-family: monospace;
+            color: #334155;
             font-size: 0.75rem;
             letter-spacing: 4px;
-            color: #334155;
             text-transform: uppercase;
+        }
+        .live-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #22d3ee;
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: 0 0 8px #22d3ee;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
 
         main {
@@ -77,199 +88,182 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
-            width: 100%;
-            max-width: 800px;
-            margin: auto;
+            gap: 1.5rem;
+            max-w: 800px;
             text-align: center;
         }
 
+        /* High-Impact Vector Branding text */
         h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2rem, 7vw, 4.5rem);
             font-weight: 900;
-            letter-spacing: -2px;
-            background: linear-gradient(to right, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            color: #ffffff;
             text-transform: uppercase;
+            transition: transform 0.3s ease, letter-spacing 0.5s ease;
         }
         h1 span {
-            background: linear-gradient(to right, #06b6d4, #6366f1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #22d3ee;
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
-        .search-wrapper {
-            width: 100%;
-            max-width: 600px;
-            position: relative;
+        .instructions {
+            color: #475569;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            animation: breathe 2s infinite alternate ease-in-out;
         }
-        .search-bar {
-            width: 100%;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(51, 65, 85, 0.6);
-            padding: 1.2rem 1.5rem;
-            padding-left: 3.2rem;
-            border-radius: 16px;
-            color: #f8fafc;
-            font-size: 1.05rem;
-            outline: none;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
-            font-family: monospace;
-        }
-        .search-bar:focus {
-            border-color: #06b6d4;
-            box-shadow: 0 0 35px rgba(6, 182, 212, 0.2);
-        }
-        .search-icon {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #06b6d4;
-            width: 20px;
-            height: 20px;
-            pointer-events: none;
-        }
-
-        /* EMBEDDED VIDEO VIEWPORT PANEL */
-        .video-box {
-            width: 100%;
-            max-width: 700px;
-            aspect-ratio: 16/9;
-            background: rgba(10, 15, 28, 0.6);
-            border: 1px solid rgba(51, 65, 85, 0.4);
-            border-radius: 16px;
-            overflow: hidden;
-            display: none; /* Triggers visible on active search */
-            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6);
-            backdrop-filter: blur(12px);
-        }
-        .video-box iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        @keyframes breathe {
+            0% { opacity: 0.4; }
+            100% { opacity: 0.9; }
         }
 
         footer {
             width: 100%;
-            max-width: 1100px;
+            max-w: 1100px;
             display: flex;
             justify-content: space-between;
-            font-family: monospace;
             font-size: 0.65rem;
             color: #1e293b;
-            border-top: 1px solid rgba(51, 65, 85, 0.1);
-            padding-top: 1.5rem;
         }
     </style>
 </head>
 <body>
+
+    <!-- Canvas Processing Module -->
     <canvas id="starfield"></canvas>
-    <div class="nebula purple"></div>
-    <div class="nebula cyan"></div>
+    <div id="neb-p" class="nebula purple"></div>
+    <div id="neb-c" class="nebula cyan"></div>
     <div class="hud-overlay"></div>
 
     <div class="interface-grid">
         <header>
-            <div>Space Mainframe</div>
-            <div style="color: #475569;">Media Node Active</div>
+            <div>Gideon Riggins</div>
+            <div><span class="live-dot" id="status-dot"></span><span id="status-text">WARP.READY</span></div>
         </header>
 
         <main>
-            <h1>Space<span>.Stream</span></h1>
-            
-            <div class="search-wrapper">
-                <svg class="search-icon" xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input type="text" id="streamQuery" class="search-bar" placeholder="Type a topic (e.g., synthwave, space, lofi)..." autocomplete="off" onkeypress="processSearch(event)" autofocus>
-            </div>
-
-            <!-- ZERO-REDIRECT EMBEDDED PLAYER CARD -->
-            <div id="playerCard" class="video-box">
-                <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
+            <h1 id="main-title">Gideon<span>.Space</span></h1>
+            <div class="instructions" id="instruction-prompt">CLICK AND HOLD MOUSE TO ENGAGE WARP</div>
         </main>
 
         <footer>
-            <div>&copy; 2026 GIDEON RIGGINS.</div>
-            <div>STATUS: UNRESTRICTED</div>
+            <div>&copy; 2026 RIGGINS. ALL ENGINE CONTROLS ACTIVE.</div>
+            <div>SILENT_DECK_V2</div>
         </footer>
     </div>
 
+    <!-- High-Velocity Matrix Physics Engine Script -->
     <script>
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
         let stars = [];
-        const numStars = 130;
-        let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+        const numStars = 200; // Increased star density for high-fidelity velocity effects
+        
+        let isWarping = false;
+        let warpFactor = 1;
+        let targetWarpFactor = 1;
+        
+        let mouse = { x: 0, y: 0 };
 
         function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            // Re-center origin vectors to center of screen layout
+            ctx.translate(canvas.width / 2, canvas.height / 2);
         }
         window.addEventListener('resize', resize);
         resize();
 
-        for(let i = 0; i < numStars; i++) {
+        // Populate Starfield Vectors relative to center origin points
+        for (let i = 0; i < numStars; i++) {
             stars.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 1.5,
-                speedX: (Math.random() - 0.5) * 0.12,
-                speedY: (Math.random() - 0.5) * 0.12,
-                alpha: Math.random()
+                x: (Math.random() - 0.5) * canvas.width,
+                y: (Math.random() - 0.5) * canvas.height,
+                z: Math.random() * canvas.width, // Depth axis variable mapping
+                color: '#ffffff'
             });
         }
 
+        // Mouse Trajectory Tracking
         window.addEventListener('mousemove', (e) => {
-            mouse.targetX = (e.clientX - window.innerWidth / 2) * 0.04;
-            mouse.targetY = (e.clientY - window.innerHeight / 2) * 0.04;
+            mouse.x = e.clientX - canvas.width / 2;
+            mouse.y = e.clientY - canvas.height / 2;
+        });
+
+        // Trigger Hyperspace Overdrive on Click Hold
+        window.addEventListener('mousedown', () => {
+            isWarping = true;
+            targetWarpFactor = 35; // Light speed acceleration vector caps
+            document.getElementById('status-text').innerText = "WARP.ACTIVE";
+            document.getElementById('status-dot').style.backgroundColor = "#ff0055"; // Hot pink engine state
+            document.getElementById('status-dot').style.boxShadow = "0 0 12px #ff0055";
+            document.getElementById('instruction-prompt').innerText = "DISENGAGE MOUSE TO DECELLERATE";
+            document.getElementById('main-title').style.transform = "scale(0.95)";
+            document.getElementById('main-title').style.letterSpacing = "6px";
+        });
+
+        window.addEventListener('mouseup', () => {
+            isWarping = false;
+            targetWarpFactor = 1; // Return to standard orbit values
+            document.getElementById('status-text').innerText = "WARP.READY";
+            document.getElementById('status-dot').style.backgroundColor = "#22d3ee";
+            document.getElementById('status-dot').style.boxShadow = "0 0 8px #22d3ee";
+            document.getElementById('instruction-prompt').innerText = "CLICK AND HOLD MOUSE TO ENGAGE WARP";
+            document.getElementById('main-title').style.transform = "scale(1)";
+            document.getElementById('main-title').style.letterSpacing = "-1px";
         });
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            mouse.x += (mouse.targetX - mouse.x) * 0.05;
-            mouse.y += (mouse.targetY - mouse.y) * 0.05;
+            // Apply slight alpha wipe background transparency loop to generate vector drag line streaks
+            ctx.fillStyle = `rgba(2, 3, 8, ${isWarping ? 0.15 : 0.4})`;
+            ctx.fillRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
             
-            ctx.fillStyle = '#ffffff';
-            stars.forEach(star => {
-                star.x += star.speedX;
-                star.y += star.speedY;
+            // Smoothly interpolate warp factor value shifts
+            warpFactor += (targetWarpFactor - warpFactor) * 0.05;
 
-                if(star.x < 0) star.x = canvas.width;
-                if(star.x > canvas.width) star.x = 0;
-                if(star.y < 0) star.y = canvas.height;
-                if(star.y > canvas.height) star.y = 0;
+            stars.forEach(star => {
+                // Accelerate star tracking forward along the Z depth plane
+                star.z -= warpFactor;
+
+                // Loop star fields forward if coordinate boundaries are exceeded
+                if (star.z <= 0) {
+                    star.z = canvas.width;
+                    star.x = (Math.random() - 0.5) * canvas.width;
+                    star.y = (Math.random() - 0.5) * canvas.height;
+                }
+
+                // Standard projection screen perspective translations (X/Z, Y/Z math models)
+                let px = (star.x / star.z) * (canvas.width * 0.6);
+                let py = (star.y / star.z) * (canvas.height * 0.6);
+
+                // Draw secondary trailing lines if light speed factor acceleration is active
+                let prevZ = star.z + warpFactor * 1.5;
+                let p_px = (star.x / prevZ) * (canvas.width * 0.6);
+                let p_py = (star.y / prevZ) * (canvas.height * 0.6);
 
                 ctx.beginPath();
-                ctx.globalAlpha = Math.abs(Math.sin(star.alpha));
-                star.alpha += 0.006;
-                ctx.arc(star.x + mouse.x * star.size, star.y + mouse.y * star.size, star.size, 0, Math.PI * 2);
-                ctx.fill();
+                if (isWarping) {
+                    // Streaking Neon Light Vectors Configuration
+                    ctx.strokeStyle = `rgba(34, 211, 230, ${Math.min(1, 1 - star.z / canvas.width)})`;
+                    ctx.lineWidth = Math.min(2, (1 - star.z / canvas.width) * 3);
+                    ctx.moveTo(px, py);
+                    ctx.lineTo(p_px, p_py);
+                    ctx.stroke();
+                } else {
+                    // Standard Ambient Point Matrix Configuration
+                    ctx.fillStyle = `rgba(255, 255, 255, ${Math.min(1, 1 - star.z / canvas.width)})`;
+                    ctx.arc(px, py, Math.min(1.5, (1 - star.z / canvas.width) * 2), 0, Math.PI * 2);
+                    ctx.fill();
+                }
             });
+
             requestAnimationFrame(animate);
         }
         animate();
-
-        // INLINE SEARCH PROCESS ENGINE (Bypasses CORS restrictions using YouTube embeds)
-        function processSearch(event) {
-            if (event.key === 'Enter') {
-                const searchString = document.getElementById('streamQuery').value.trim();
-                if (!searchString) return;
-
-                const card = document.getElementById('playerCard');
-                const frame = document.getElementById('videoFrame');
-
-                card.style.display = "block";
-                
-                // Routes search keyword directly into the official embed player query stream safely
-                frame.src = `https://youtube.com{encodeURIComponent(searchString)}&autoplay=1`;
-            }
-        }
     </script>
 </body>
 </html>
