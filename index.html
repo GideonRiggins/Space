@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Space</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #020205;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #00dbde, #fc00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        p {
+            color: #8a8d9b;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .planet {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 30% 30%, #00dbde, #090979);
+            border-radius: 50%;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 0 50px rgba(0, 219, 222, 0.4);
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .btn {
+            background: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
+            border: none;
+            color: white;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(252, 0, 255, 0.3);
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(252, 0, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="planet"></div>
+        <h1>EXPLORE THE UNKNOWN</h1>
+        <p>Live on the web. Clean, fast, and entirely custom.</p>
+        <button class="btn" onclick="alert('Systems fully operational!')">Initialize Sequence</button>
+    </div>
+
+</body>
+</html>
