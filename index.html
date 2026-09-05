@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Space</title>
+    <title>Gideon Riggins | Cosmic Dev</title>
     <style>
-        /* Base Page Setup & Resets */
+        /* Base Setup & Space Layout Constraints */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body {
-            background-color: #03050d;
+            background-color: #02040a;
             color: #f1f5f9;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             position: relative;
             min-height: 100vh;
         }
 
-        /* Fixed Background Canvas for Interactive Particles */
         #starfield {
             position: fixed;
             inset: 0;
@@ -23,59 +22,58 @@
             pointer-events: none;
         }
 
-        /* Ambient Glowing Nebula Clouds */
+        /* Ambient Celestial Nebulas */
         .nebula {
             position: fixed;
             width: 550px;
             height: 550px;
             border-radius: 50%;
-            filter: blur(140px);
+            filter: blur(150px);
             z-index: 2;
-            opacity: 0.25;
-            animation: cosmicDrift 20s infinite alternate ease-in-out;
+            opacity: 0.2;
+            animation: cosmicDrift 25s infinite alternate ease-in-out;
         }
-        .purple { top: -15%; left: -10%; background: #7c3aed; }
-        .cyan { bottom: -15%; right: -10%; background: #06b6d4; animation-duration: 25s; animation-delay: -7s; }
+        .purple { top: -10%; left: -10%; background: #6d28d9; }
+        .cyan { bottom: -10%; right: -10%; background: #0e7490; animation-duration: 30s; animation-delay: -5s; }
 
         @keyframes cosmicDrift {
             0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.3) translate(60px, -60px); }
+            100% { transform: scale(1.25) translate(50px, -50px); }
         }
 
-        /* Scanline Overlay Texture */
+        /* Scanline Interface Filter Overlay */
         .hud-overlay {
             position: fixed;
             inset: 0;
             z-index: 3;
-            background: linear-gradient(rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+            background: linear-gradient(rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.12) 50%), linear-gradient(90deg, rgba(18, 24, 38, 0) 50%, rgba(0, 0, 0, 0.12) 50%);
             background-size: 4px 4px;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.25;
         }
 
-        /* Interface Layout Framework */
         .interface-grid {
             position: relative;
             z-index: 10;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2.5rem;
+            padding: 2.5rem 1.5rem;
             min-height: 100vh;
         }
 
         header {
             width: 100%;
-            max-w: 1200px;
+            max-w: 1100px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: monospace;
-            font-size: 0.7rem;
-            letter-spacing: 5px;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            color: #64748b;
-            margin-bottom: 4rem;
+            color: #475569;
+            margin-bottom: 6rem;
         }
         .live-dot {
             display: inline-block;
@@ -93,19 +91,19 @@
             align-items: center;
             justify-content: center;
             gap: 1.5rem;
-            max-w: 750px;
+            max-w: 800px;
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 6rem;
         }
 
         /* Typography Vector Gradients */
         h1 {
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: -2px;
-            line-height: 0.95;
-            background: linear-gradient(to bottom, #ffffff 40%, #cbd5e1 70%, #475569 100%);
+            line-height: 1;
+            background: linear-gradient(to bottom, #ffffff 40%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -115,19 +113,19 @@
             -webkit-text-fill-color: transparent;
         }
 
-        p {
+        p.subtitle {
             color: #94a3b8;
             line-height: 1.7;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
             font-weight: 300;
-            max-w: 540px;
+            max-w: 580px;
         }
 
-        /* Action Launch Button Capsule */
+        /* Main Launch Core Button */
         .launch-btn {
-            background: rgba(10, 15, 30, 0.7);
+            background: rgba(15, 23, 42, 0.6);
             border: 1px solid #1e293b;
-            padding: 1.2rem 2.5rem;
+            padding: 1.2rem 2.8rem;
             color: #22d3ee;
             font-family: monospace;
             font-size: 0.75rem;
@@ -136,119 +134,203 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 1rem;
         }
         .launch-btn:hover {
             border-color: #22d3ee;
-            box-shadow: 0 0 25px rgba(34, 211, 238, 0.2);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
             transform: translateY(-2px);
         }
 
-        /* Hidden Content Dashboard Panel (Slides open smoothly) */
+        /* Expanded Real Site Content Panel */
         .content-panel {
             max-height: 0;
             overflow: hidden;
             width: 100%;
-            max-w: 800px;
-            transition: max-height 1s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-top: 2rem;
+            max-w: 1100px;
+            transition: max-height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 4rem;
         }
         .panel-show {
-            max-height: 800px;
+            max-height: 2000px; /* Allow room for all real modules */
         }
+
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             padding: 1rem 0;
         }
+
         .cyber-card {
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(10, 15, 30, 0.5);
             border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 16px;
+            padding: 2rem;
             text-align: left;
             transition: all 0.3s ease;
         }
         .cyber-card:hover {
-            border-color: #7c3aed;
-            background: rgba(15, 23, 42, 0.7);
+            border-color: #818cf8;
+            background: rgba(15, 23, 42, 0.6);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7);
         }
+
         .card-title {
             font-family: monospace;
-            font-size: 0.85rem;
-            color: #818cf8;
+            font-size: 0.95rem;
+            color: #ffffff;
             letter-spacing: 1px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .card-desc {
+
+        /* Real Content Specific Styling */
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+        .tag {
+            font-family: monospace;
+            font-size: 0.7rem;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            padding: 4px 10px;
+            border-radius: 6px;
+            color: #cbd5e1;
+        }
+        
+        .repo-link {
+            display: inline-block;
+            margin-top: 1.2rem;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #22d3ee;
+            text-decoration: none;
+            border-bottom: 1px dashed #22d3ee;
+            padding-bottom: 2px;
+            transition: color 0.2s;
+        }
+        .repo-link:hover { color: #818cf8; border-color: #818cf8; }
+
+        /* Functional Inline Email Form Box */
+        .contact-input {
+            width: 100%;
+            background: #090d16;
+            border: 1px solid #1e293b;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: #f1f5f9;
             font-size: 0.85rem;
-            color: #94a3b8;
-            line-height: 1.5;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            outline: none;
         }
+        .contact-input:focus { border-color: #818cf8; }
+        .submit-btn {
+            background: #818cf8;
+            color: #040610;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            font-family: monospace;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover { background: #22d3ee; }
 
         footer {
             font-family: monospace;
             font-size: 0.65rem;
             color: #334155;
             width: 100%;
-            max-w: 1200px;
+            max-w: 1100px;
             display: flex;
             justify-content: space-between;
             margin-top: auto;
-            padding-top: 2rem;
+            padding-top: 4rem;
         }
         footer a { color: #334155; text-decoration: none; }
+        footer a:hover { color: #64748b; }
     </style>
 </head>
 <body>
 
-    <!-- Visual Layer Buffers -->
+    <!-- Celestial Infrastructure Overlays -->
     <canvas id="starfield"></canvas>
     <div class="nebula purple"></div>
     <div class="nebula cyan"></div>
     <div class="hud-overlay"></div>
 
     <div class="interface-grid">
-        <!-- Site Header Row -->
+        <!-- Site Header Navigation Row -->
         <header>
-            <div>Cosmic Space</div>
-            <div><span class="live-dot"></span>SYS.ONLINE</div>
+            <div>Gideon Riggins</div>
+            <div><span class="live-dot"></span>PROD.MAIN_LINE</div>
         </header>
 
-        <!-- Main Core Landing Section -->
+        <!-- Main Landing Node -->
         <main>
-            <h1 id="main-heading">Explore The <br><span>Unknown</span></h1>
-            <p>Live on the web. Clean, fast, and entirely custom. Step into a lightweight engine engineered for optimal performance across the digital expanse.</p>
-            <button class="launch-btn" onclick="activateEngine(this)">Initialize Sequence</button>
+            <h1 id="main-heading">Explore The <br><span>Digital Expanse</span></h1>
+            <p class="subtitle">Front-end developer and automation engineer creating high-performance browser interfaces and lightweight deployment structures across the web.</p>
+            <button class="launch-btn" onclick="activateEngine(this)">Open Comm Channels</button>
 
-            <!-- Hidden Content Grid (Unfolds smoothly on click) -->
+            <!-- REAL WEB UTILITY PANEL -->
             <div id="data-panel" class="content-panel">
                 <div class="card-grid">
+                    
+                    <!-- MODULE 1: REAL CODE REPOSITORY LINK -->
                     <div class="cyber-card">
-                        <div class="card-title">🪐 Orbit Core</div>
-                        <div class="card-desc">Welcome to the active space dashboard module. This panel was deployed via pure browser event bindings.</div>
+                        <div class="card-title">⚡ Production Source</div>
+                        <p style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">This live site configuration is open-source and hosted directly out of my automated GitHub repository environment.</p>
+                        <a href="https://github.com" target="_blank" class="repo-link">View Repo Engine →</a>
                     </div>
+
+                    <!-- MODULE 2: YOUR REAL SKILLS & STACK -->
                     <div class="cyber-card">
-                        <div class="card-title">🛠 Transmissions</div>
-                        <div class="card-desc">Connected directly to GitHub Pages. All styling assets remain local, performant, and securely rendered.</div>
+                        <div class="card-title">🛠 Technical Matrix</div>
+                        <p style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">Core competencies utilized to deploy zero-bloat, secure digital properties:</p>
+                        <div class="stack-list">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript (ES6+)</span>
+                            <span class="tag">GitHub Actions</span>
+                            <span class="tag">CI/CD Pipelines</span>
+                        </div>
                     </div>
+
+                    <!-- MODULE 3: WORKING CONTACT MECHANISM -->
                     <div class="cyber-card">
-                        <div class="card-title">📡 System Output</div>
-                        <div class="card-desc">Ready to hold your portfolio projects, custom application logs, or personal links inside this mainframe.</div>
+                        <div class="card-title">📡 Establish Contact</div>
+                        <!-- Direct link form using Formspree redirection protocol -->
+                        <form action="https://formspree.io" method="POST" onsubmit="alert('Transmission Logged!');">
+                            <input type="email" name="email" class="contact-input" placeholder="Secure Return Email Address" required>
+                            <textarea name="message" class="contact-input" rows="2" placeholder="Message Payload Transmission..." required style="resize:none; font-family:sans-serif;"></textarea>
+                            <button type="submit" class="submit-btn">Broadcast Transmission</button>
+                        </form>
                     </div>
+
                 </div>
             </div>
         </main>
 
-        <!-- System Footer -->
+        <!-- System Footer Metadata -->
         <footer>
-            <div>&copy; 2026 GIDEON RIGGINS.</div>
-            <div><a href="https://github.com" target="_blank">REPOS.SRC</a></div>
+            <div>&copy; 2026 GIDEON RIGGINS. ALL SYSTEMS OPERATIONAL.</div>
+            <div><a href="https://github.com" target="_blank">TERMINAL.SRC</a></div>
         </footer>
     </div>
 
-    <!-- Background Particle Simulation Engine Script -->
+    <!-- Active Mouse-Tracking Starfield Engine Script -->
     <script>
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
@@ -263,7 +345,6 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // Populate Starfield Matrices
         for(let i = 0; i < numStars; i++) {
             stars.push({
                 x: Math.random() * canvas.width,
@@ -276,7 +357,6 @@
             });
         }
 
-        // Capture Cursor Trajectory Vectors
         window.addEventListener('mousemove', (e) => {
             mouse.targetX = (e.clientX - window.innerWidth / 2) * 0.05;
             mouse.targetY = (e.clientY - window.innerHeight / 2) * 0.05;
@@ -306,18 +386,16 @@
         }
         animate();
 
-        // Button Event Handler & Structural Expansion Lock
+        // Reveal Active Real Content Panels
         function activateEngine(btn) {
-            btn.innerText = "LINK ESTABLISHED";
+            btn.innerText = "MAIN ENGINE ONLINE";
             btn.style.borderColor = "#4ade80";
             btn.style.color = "#4ade80";
             btn.style.boxShadow = "0 0 35px rgba(74, 222, 128, 0.3)";
             
-            // Trigger structural pane slide unfold
             const panel = document.getElementById('data-panel');
             panel.classList.add('panel-show');
             
-            // Run view tracking loop adjustment
             setTimeout(() => {
                 panel.scrollIntoView({ behavior: 'smooth', block: 'end' });
             }, 300);
