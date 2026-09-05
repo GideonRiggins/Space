@@ -3,139 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gideon Riggins | Professional Portfolio</title>
-    <!-- High-Fidelity Tailwind Framework Layer -->
-    <script src="https://tailwindcss.com"></script>
+    <title>Gideon Riggins | Photo Engine</title>
     <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        /* Modern Setup and Reset Layout Geometry */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: #090b11;
+            color: #f1f5f9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .upload-badge {
+            font-size: 0.75rem;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            color: #94a3b8;
+        }
+
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 🖼️ AUTOMATED MASONRY FLOW PHOTO GRID */
+        .photo-gallery {
+            column-count: 1;
+            column-gap: 1.5rem;
+            width: 100%;
+        }
+
+        /* Responsive column distribution rules based on monitor size */
+        @media (min-width: 480px) { .photo-gallery { column-count: 2; } }
+        @media (min-width: 768px) { .photo-gallery { column-count: 3; } }
+        @media (min-width: 1024px) { .photo-gallery { column-count: 4; } }
+
+        .photo-card {
+            background: #111420;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            background-color: #0e111a; /* Placeholder skeleton color while loading */
+        }
+
+        .photo-meta {
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .photo-tag {
+            color: #e2e8f0;
+            font-weight: bold;
+        }
+
+        footer {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #334155;
+            border-t: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body>
 
-    <!-- Global Navigation Header bar -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="font-bold text-slate-900 tracking-tight text-lg">Gideon Riggins</div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
-                <a href="#services" class="hover:text-blue-600 transition-colors">Services</a>
-                <a href="#portfolio" class="hover:text-blue-600 transition-colors">Portfolio</a>
-                <a href="#contact" class="bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors">Get In Touch</a>
-            </div>
-        </div>
-    </nav>
+    <header>
+        <h1>Gideon Riggins / Photo.Archive</h1>
+        <div class="upload-badge">GRID STATUS: OPERATIONAL</div>
+    </header>
 
-    <!-- Main Hero Presentation Deck -->
-    <section id="about" class="py-24 bg-white border-b border-slate-100">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-                Building Clean, Modern, and Practical Web Applications
-            </h1>
-            <p class="text-slate-500 text-lg max-w-2xl mx-auto mb-8 leading-relaxed font-light">
-                Hi, I'm Gideon. I specialize in crafting ultra-fast, user-friendly frontend experiences using clean architecture and modern engineering standards.
-            </p>
-            <div class="flex justify-center gap-4">
-                <a href="#portfolio" class="px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-all shadow-sm">View My Work</a>
-                <a href="#services" class="px-6 py-3 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all">Learn More</a>
+    <main>
+        <!-- MULTI-COLUMN PHOTO FEED (Populated with premium high-res placeholders) -->
+        <div class="photo-gallery">
+            
+            <div class="photo-card">
+                <img src="https://unsplash.com" alt="Cosmic Texture">
+                <div class="photo-meta"><span class="photo-tag">#001_NEBULA</span><span>600x800</span></div>
             </div>
-        </div>
-    </section>
 
-    <!-- Core Services Capabilities Cards Grid -->
-    <section id="services" class="py-24 bg-slate-50 border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Core Services</h2>
-                <p class="mt-2 text-sm text-slate-500">Professional solutions engineered for high performance.</p>
+            <div class="photo-card">
+                <img src="https://unsplash.com" alt="Digital Matrix Network">
+                <div class="photo-meta"><span class="photo-tag">#002_MATRIX</span><span>600x400</span></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
-                    <div class="text-2xl mb-4">window</div>
-                    <h3 class="font-bold text-slate-900 mb-2">Frontend Engineering</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Developing lightning-fast user interfaces using optimized JavaScript architectures and pristine stylesheets.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
-                    <div class="text-2xl mb-4">settings</div>
-                    <h3 class="font-bold text-slate-900 mb-2">Automation & Tools</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Streamlining continuous deployment models and data parsing scripts to maintain zero-downtime platforms.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
-                    <div class="text-2xl mb-4">phone</div>
-                    <h3 class="font-bold text-slate-900 mb-2">Responsive Design</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Creating clean fluid layouts built to scale dynamically across mobile screens, tablets, and desktop monitors.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Production Project Registry Modules -->
-    <section id="portfolio" class="py-24 bg-white border-b border-slate-200">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Featured Projects</h2>
-                <p class="mt-2 text-sm text-slate-500">A look inside my live open-source engineering modules.</p>
+            <div class="photo-card">
+                <img src="https://unsplash.com" alt="Abstract Fluid Flow">
+                <div class="photo-meta"><span class="photo-tag">#003_FLUID</span><span>600x900</span></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="group bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all hover:border-slate-300">
-                    <div class="p-8">
-                        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Web App</span>
-                        <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">The Space Telemetry Portal</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6">A clean, high-performance static repository index configured and hosted right here on GitHub Pages.</p>
-                        <a href="https://github.com" target="_blank" class="text-slate-900 text-sm font-semibold inline-flex items-center gap-1 group-hover:text-blue-600 transition-colors">
-                            View Codebase Source &rarr;
-                        </a>
-                    </div>
-                </div>
-                <div class="group bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-sm transition-all hover:border-slate-300">
-                    <div class="p-8">
-                        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-blue-600">Systems Optimization</span>
-                        <h3 class="text-xl font-bold text-slate-900 mt-1 mb-2">CI/CD Automated Deployment</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Configuring automated workflow pipelines to test, compile, and distribute layout updates securely on every branch sync.</p>
-                        <a href="https://github.com/actions" target="_blank" class="text-slate-900 text-sm font-semibold inline-flex items-center gap-1 group-hover:text-blue-600 transition-colors">
-                            View Action Runner Logs &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Communication Broadcast Form Network node -->
-    <section id="contact" class="py-24 bg-slate-50">
-        <div class="max-w-md mx-auto px-6">
-            <div class="text-center mb-10">
-                <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Get In Touch</h2>
-                <p class="mt-2 text-sm text-slate-500">Have an opportunity or question? Send a direct message.</p>
+            <div class="photo-card">
+                <img src="https://unsplash.com" alt="Cyber Grid Core">
+                <div class="photo-meta"><span class="photo-tag">#004_CIRCUIT</span><span>600x600</span></div>
             </div>
-            <form action="https://formspree.io" method="POST" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Full Name</label>
-                    <input type="text" name="name" class="w-full border border-slate-200 p-3 rounded-lg text-sm bg-white outline-none focus:border-slate-400" placeholder="Jane Doe" required>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Email Address</label>
-                    <input type="email" name="email" class="w-full border border-slate-200 p-3 rounded-lg text-sm bg-white outline-none focus:border-slate-400" placeholder="jane@example.com" required>
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Message</label>
-                    <textarea name="message" rows="4" class="w-full border border-slate-200 p-3 rounded-lg text-sm bg-white outline-none focus:border-slate-400 resize-none" placeholder="Describe your goals or project parameters..." required></textarea>
-                </div>
-                <button type="submit" class="w-full bg-slate-900 text-white font-medium p-3 rounded-lg text-sm hover:bg-slate-800 transition-colors shadow-sm">
-                    Send Message
-                </button>
-            </form>
-        </div>
-    </section>
 
-    <!-- Global Layout Footer -->
-    <footer class="bg-white border-t border-slate-200">
-        <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-medium">
-            <p>&copy; 2026 Gideon Riggins. All rights reserved.</p>
-            <div class="flex gap-6 mt-4 sm:mt-0">
-                <a href="https://github.com" target="_blank" class="hover:text-slate-600 transition-colors">GitHub Repository</a>
+            <div class="photo-card">
+                <img src="https://unsplash.com" alt="Satellite View">
+                <div class="photo-meta"><span class="photo-tag">#005_HORIZON</span><span>600x450</span></div>
             </div>
+
+            <div class="photo-card">
+                <img src="https://unsplash.com" alt="Gradients Layer">
+                <div class="photo-meta"><span class="photo-tag">#006_VECTOR</span><span>600x750</span></div>
+            </div>
+
         </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Gideon Riggins. Media storage module loaded.
     </footer>
 
 </body>
