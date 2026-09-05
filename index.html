@@ -132,8 +132,8 @@
                     <div class="metric-item-value" id="windDisplay">-- km/h</div>
                 </div>
                 <div>
-                    <div class="metric-item-label">Humidity</div>
-                    <div class="metric-item-value" id="humidityDisplay">--%</div>
+                    <div class="metric-item-label">Wind Direction</div>
+                    <div class="metric-item-value" id="directionDisplay">--°</div>
                 </div>
             </div>
         </div>
@@ -160,7 +160,7 @@
             const locName = document.getElementById('locName');
             const tempDisplay = document.getElementById('tempDisplay');
             const windDisplay = document.getElementById('windDisplay');
-            const humidityDisplay = document.getElementById('humidityDisplay');
+            const directionDisplay = document.getElementById('directionDisplay');
             const timeLabel = document.getElementById('currentTime');
 
             // Accessing open-source coordinates geocoding metrics
@@ -174,11 +174,12 @@
                         return;
                     }
 
+                    // FIXED: Target the first result node item inside the index array explicitly
                     const location = geoData.results[0];
                     const lat = location.latitude;
                     const lon = location.longitude;
                     
-                    locName.innerText = `${location.name}, ${location.country}`;
+                    locName.innerText = `${location.name}, ${location.country || 'Global Node'}`;
                     timeLabel.innerText = `Coordinates: ${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E`;
 
                     // Fetch actual atmospheric datasets based on geocoded pins
@@ -195,13 +196,12 @@
                     // Render raw telemetry data streams into page components
                     tempDisplay.innerText = `${current.temperature}°C`;
                     windDisplay.innerText = `${current.windspeed} km/h`;
-                    
-                    // Set relative fallback estimation for weather humidity metric array
-                    humidityDisplay.innerText = `Operational`;
+                    directionDisplay.innerText = `${current.winddirection}°`;
 
                     card.style.display = "block";
                 })
-                .catch(() => {
+                .catch((err) => {
+                    console.error(err);
                     alert("Network connection exception. Could not connect to environmental database layers.");
                 });
         }
