@@ -115,7 +115,7 @@
     <div class="container">
         <!-- Input Row -->
         <div class="card search-row">
-            <input type="text" id="cityInput" placeholder="Enter city name (New York, London, Paris, Tokyo)..." autofocus>
+            <input type="text" id="cityInput" placeholder="Enter city name (e.g., Tokyo, Austin, Paris)..." autofocus>
             <button onclick="getWeatherData()">Search</button>
         </div>
 
@@ -132,15 +132,15 @@
                     <div class="metric-item-value" id="windDisplay">-- km/h</div>
                 </div>
                 <div>
-                    <div class="metric-item-label">Conditions Status</div>
-                    <div class="metric-item-value" id="conditionDisplay">Stable</div>
+                    <div class="metric-item-label">Station Coordinates</div>
+                    <div class="metric-item-value" id="conditionDisplay">--</div>
                 </div>
             </div>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 Gideon Riggins. Local Dashboard Platform.
+        &copy; 2026 Gideon Riggins. Live Data Matrix.
     </footer>
 
     <script>
@@ -150,7 +150,6 @@
             }
         });
 
-        // SOLID SYSTEM WEATHER ENGINE - ZERO NETWORK DROPS
         function getWeatherData() {
             const cityName = document.getElementById('cityInput').value.trim();
             if (!cityName) return;
@@ -161,52 +160,48 @@
             const windDisplay = document.getElementById('windDisplay');
             const conditionDisplay = document.getElementById('conditionDisplay');
 
-            // Standard fallback dictionary array data model mapping coordinates natively
-            const cityDatabase = {
-                "new york": { lat: 40.71, lon: -74.01, name: "New York, United States" },
-                "london": { lat: 51.51, lon: -0.13, name: "London, United Kingdom" },
-                "paris": { lat: 48.85, lon: 2.35, name: "Paris, France" },
-                "tokyo": { lat: 35.68, lon: 139.69, name: "Tokyo, Japan" },
-                "berlin": { lat: 52.52, lon: 13.40, name: "Berlin, Germany" }
-            };
+            // 1. Fetch live coordinates from the unblocked geocoding server endpoint
+            const geoUrl = `https://open-meteo.com{encodeURIComponent(cityName)}&count=1&language=en&format=json`;
 
-            const query = cityName.toLowerCase();
-            let lat, lon, targetName;
-
-            if (cityDatabase[query]) {
-                lat = cityDatabase[query].lat;
-                lon = cityDatabase[query].lon;
-                targetName = cityDatabase[query].name;
-            } else {
-                // Dynamic fallback coordinates loop if city isn't in database
-                lat = (Math.random() * 30 + 20).toFixed(2);
-                lon = (Math.random() * 60 - 10).toFixed(2);
-                targetName = `${cityName.charAt(0).toUpperCase() + cityName.slice(1)}, Global Region`;
-            }
-
-            const weatherUrl = `https://open-meteo.com{lat}&longitude=${lon}&current_weather=true`;
-
-            fetch(weatherUrl)
+            fetch(geoUrl)
                 .then(res => res.json())
-                .then(weatherData => {
-                    if (!weatherData || !weatherData.current_weather) return;
+                .then(geoData => {
+                    if (!geoData.results || geoData.results.length === 0) {
+                        alert("City vector entry not detected inside records.");
+                        return;
+                    }
 
-                    const current = weatherData.current_weather;
+                    // Grab the raw target dictionary indices perfectly from the array item
+                    const location = geoData.results[0];
+                    const lat = location.latitude;
+                    const lon = location.longitude;
                     
-                    locName.innerText = targetName;
-                    tempDisplay.innerText = `${current.temperature}°C`;
-                    windDisplay.innerText = `${current.windspeed} km/h`;
-                    conditionDisplay.innerText = "Clear Horizon";
+                    locName.innerText = `${location.name}, ${location.country || 'Global Node'}`;
+                    conditionDisplay.innerText = `${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E`;
+
+                    // 2. FIXED: Pumping completely explicit dynamic coordinate variables into the fresh API data payload parameters keys
+                    const weatherUrl = `https://open-meteo.com{lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m`;
+
+                    return fetch(weatherUrl);
+                })
+                .then(res => {
+                    if (!res) return;
+                    return res.json();
+                })
+                .then(weatherData => {
+                    if (!weatherData || !weatherData.current) return;
+
+                    // Parse the updated properties dictionary tree tags safely
+                    const currentData = weatherData.current;
+                    
+                    tempDisplay.innerText = `${currentData.temperature_2m}°C`;
+                    windDisplay.innerText = `${currentData.wind_speed_10m} km/h`;
 
                     card.style.display = "block";
                 })
-                .catch(() => {
-                    // Fail-safe static simulation data so the page never displays a blank alert message box
-                    locName.innerText = `${cityName.charAt(0).toUpperCase() + cityName.slice(1)}, Station Node`;
-                    tempDisplay.innerText = "22°C";
-                    windDisplay.innerText = "14.5 km/h";
-                    conditionDisplay.innerText = "Matrix Loop Backup";
-                    card.style.display = "block";
+                .catch((err) => {
+                    console.error(err);
+                    alert("Sync interface timeout. Retrying packet stream loop...");
                 });
         }
     </script>
