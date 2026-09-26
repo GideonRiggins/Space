@@ -3,207 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Weather Dashboard</title>
+    <title>Cool Floating Clouds Website</title>
     <style>
-        /* Base Setup & Clean Corporate Presentation Framework */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background-color: #f0f4f8;
-            color: #1e293b;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #1a1c2e 0%, #394168 50%, #7d6f8d 100%);
+            color: #ffffff;
+        }
+
+        /* Animated Cloud Background Container */
+        .sky-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Base Cloud Styling */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 100px;
+            filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.1));
+            animation: float linear infinite;
+        }
+
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        /* Cloud Shapes */
+        .cloud-style-1 {
+            width: 200px;
+            height: 60px;
+        }
+        .cloud-style-1::before {
+            width: 80px;
+            height: 80px;
+            top: -40px;
+            left: 30px;
+        }
+        .cloud-style-1::after {
+            width: 100px;
+            height: 100px;
+            top: -50px;
+            right: 30px;
+        }
+
+        .cloud-style-2 {
+            width: 300px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .cloud-style-2::before {
+            width: 120px;
+            height: 120px;
+            top: -60px;
+            left: 40px;
+        }
+        .cloud-style-2::after {
+            width: 150px;
+            height: 150px;
+            top: -85px;
+            right: 40px;
+        }
+
+        /* Cloud Instances with Individual Speed and Placement */
+        .c1 { top: 10%; animation-duration: 35s; transform: scale(0.6); }
+        .c2 { top: 35%; animation-duration: 55s; transform: scale(1.1); animation-delay: -10s; }
+        .c3 { top: 60%; animation-duration: 42s; transform: scale(0.8); animation-delay: -25s; }
+        .c4 { top: 20%; animation-duration: 70s; transform: scale(1.4); animation-delay: -40s; }
+        .c5 { top: 75%; animation-duration: 48s; transform: scale(0.5); animation-delay: -5s; }
+
+        /* Floating Animation Matrix */
+        @keyframes float {
+            0% {
+                left: -350px;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Foreground Content */
+        .main-content {
+            position: relative;
+            z-index: 2;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 2rem 1rem;
-        }
-        .container {
-            width: 100%;
-            max-width: 700px;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        /* Dashboard Presentation Cards */
-        .card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-        .search-row {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-        }
-        input {
-            flex: 1;
-            padding: 0.75rem 1.2rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            font-size: 1rem;
-            outline: none;
-        }
-        input:focus {
-            border-color: #3b82f6;
-        }
-        button {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        button:hover {
-            background: #2563eb;
-        }
-        /* Weather Metrics Styling */
-        .location-header {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: #0f172a;
-        }
-        .time-label {
-            font-size: 0.85rem;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-        .main-temp {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #2563eb;
-            line-height: 1;
-            margin-bottom: 1.5rem;
-        }
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 1.5rem;
-        }
-        .metric-item-label {
-            font-size: 0.75rem;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-        .metric-item-value {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #334155;
-        }
-        footer {
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-top: 2rem;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffffff, #c2ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #d1d5db;
+        }
+
+        .cta-btn {
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1c2e;
+            background: #ffffff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.25);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Input Row -->
-        <div class="card search-row">
-            <input type="text" id="cityInput" placeholder="Enter city name (e.g., Tokyo, Austin, Paris)..." autofocus>
-            <button onclick="getWeatherData()">Search</button>
-        </div>
-
-        <!-- Telemetry Display Card -->
-        <div class="card" id="weatherCard" style="display: none;">
-            <div class="location-header" id="locName">City Name</div>
-            <div class="time-label" id="currentTime">System Linked</div>
-            
-            <div class="main-temp" id="tempDisplay">--°C</div>
-            
-            <div class="metrics-grid">
-                <div>
-                    <div class="metric-item-label">Wind Speed</div>
-                    <div class="metric-item-value" id="windDisplay">-- km/h</div>
-                </div>
-                <div>
-                    <div class="metric-item-label">Station Coordinates</div>
-                    <div class="metric-item-value" id="conditionDisplay">--</div>
-                </div>
-            </div>
-        </div>
+    <!-- Floating Clouds Layer -->
+    <div class="sky-container">
+        <div class="cloud cloud-style-1 c1"></div>
+        <div class="cloud cloud-style-2 c2"></div>
+        <div class="cloud cloud-style-1 c3"></div>
+        <div class="cloud cloud-style-2 c4"></div>
+        <div class="cloud cloud-style-1 c5"></div>
     </div>
 
-    <footer>
-        &copy; 2026 Gideon Riggins. Live Data Matrix.
-    </footer>
+    <!-- Website Core Content -->
+    <main class="main-content">
+        <h1>Drift Away</h1>
+        <p>Welcome to a sleek, modern interface styled with beautiful CSS-only glassmorphism clouds drifting seamlessly across a twilight sky matrix.</p>
+        <button class="cta-btn">Explore More</button>
+    </main>
 
-    <script>
-        document.getElementById('cityInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                getWeatherData();
-            }
-        });
-
-        function getWeatherData() {
-            const cityName = document.getElementById('cityInput').value.trim();
-            if (!cityName) return;
-
-            const card = document.getElementById('weatherCard');
-            const locName = document.getElementById('locName');
-            const tempDisplay = document.getElementById('tempDisplay');
-            const windDisplay = document.getElementById('windDisplay');
-            const conditionDisplay = document.getElementById('conditionDisplay');
-
-            // 1. Fetch live coordinates from the unblocked geocoding server endpoint
-            const geoUrl = `https://open-meteo.com{encodeURIComponent(cityName)}&count=1&language=en&format=json`;
-
-            fetch(geoUrl)
-                .then(res => res.json())
-                .then(geoData => {
-                    if (!geoData.results || geoData.results.length === 0) {
-                        alert("City vector entry not detected inside records.");
-                        return;
-                    }
-
-                    // Grab the raw target dictionary indices perfectly from the array item
-                    const location = geoData.results[0];
-                    const lat = location.latitude;
-                    const lon = location.longitude;
-                    
-                    locName.innerText = `${location.name}, ${location.country || 'Global Node'}`;
-                    conditionDisplay.innerText = `${lat.toFixed(2)}°N, ${lon.toFixed(2)}°E`;
-
-                    // 2. FIXED: Pumping completely explicit dynamic coordinate variables into the fresh API data payload parameters keys
-                    const weatherUrl = `https://open-meteo.com{lat}&longitude=${lon}&current=temperature_2m,wind_speed_10m`;
-
-                    return fetch(weatherUrl);
-                })
-                .then(res => {
-                    if (!res) return;
-                    return res.json();
-                })
-                .then(weatherData => {
-                    if (!weatherData || !weatherData.current) return;
-
-                    // Parse the updated properties dictionary tree tags safely
-                    const currentData = weatherData.current;
-                    
-                    tempDisplay.innerText = `${currentData.temperature_2m}°C`;
-                    windDisplay.innerText = `${currentData.wind_speed_10m} km/h`;
-
-                    card.style.display = "block";
-                })
-                .catch((err) => {
-                    console.error(err);
-                    alert("Sync interface timeout. Retrying packet stream loop...");
-                });
-        }
-    </script>
 </body>
 </html>
