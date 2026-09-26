@@ -3,174 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cool Floating Clouds Website</title>
+    <title>Realistic Floating Clouds</title>
     <style>
-        /* Reset and Base Styles */
+        /* Base Setup */
         * {
             margin: 0;
             padding: 0;
-            box-box-sizing: border-box;
+            box-sizing: border-box;
         }
 
         body, html {
             width: 100%;
             height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            background: linear-gradient(to bottom, #1a1c2e 0%, #394168 50%, #7d6f8d 100%);
-            color: #ffffff;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(to bottom, #111e36 0%, #1f3b68 40%, #4a75a0 85%, #8baec6 100%);
         }
 
-        /* Animated Cloud Background Container */
-        .sky-container {
-            position: fixed;
+        /* 3D Viewport Setup */
+        .sky-viewport {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            perspective: 400px;
+            perspective-origin: 50% 50%;
             z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
         }
 
-        /* Base Cloud Styling */
-        .cloud {
+        .cloud-world {
             position: absolute;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 100px;
-            filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.1));
-            animation: float linear infinite;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
         }
 
-        .cloud::before, .cloud::after {
-            content: '';
+        /* Highly Realistic CSS Cloud Layering */
+        .cloud-group {
             position: absolute;
-            background: inherit;
+            width: 500px;
+            height: 250px;
+            top: var(--top);
+            transform-style: preserve-3d;
+            animation: drift var(--speed) linear infinite;
+            animation-delay: var(--delay);
+            opacity: 0;
+        }
+
+        /* Individual realistic puff layers using gradients & blur */
+        .puff {
+            position: absolute;
+            background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.85) 0%, rgba(240, 245, 255, 0.6) 30%, rgba(180, 200, 220, 0.2) 70%, rgba(0, 0, 0, 0) 100%);
             border-radius: 50%;
+            filter: blur(25px);
+            mix-blend-mode: screen;
         }
 
-        /* Cloud Shapes */
-        .cloud-style-1 {
-            width: 200px;
-            height: 60px;
-        }
-        .cloud-style-1::before {
-            width: 80px;
-            height: 80px;
-            top: -40px;
-            left: 30px;
-        }
-        .cloud-style-1::after {
-            width: 100px;
-            height: 100px;
-            top: -50px;
-            right: 30px;
-        }
+        /* Cloud Structural Variations */
+        .puff-1 { width: 320px; height: 180px; top: 20px; left: 40px; transform: translateZ(20px); }
+        .puff-2 { width: 260px; height: 220px; top: -30px; left: 160px; transform: translateZ(-10px) scale(1.1); }
+        .puff-3 { width: 220px; height: 140px; top: 60px; left: 240px; transform: translateZ(40px); }
+        .puff-4 { width: 340px; height: 160px; top: -10px; left: -20px; transform: translateZ(-30px); }
+        .puff-5 { width: 180px; height: 120px; top: 80px; left: 100px; transform: translateZ(10px); }
 
-        .cloud-style-2 {
-            width: 300px;
-            height: 90px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-        .cloud-style-2::before {
-            width: 120px;
-            height: 120px;
-            top: -60px;
-            left: 40px;
-        }
-        .cloud-style-2::after {
-            width: 150px;
-            height: 150px;
-            top: -85px;
-            right: 40px;
-        }
-
-        /* Cloud Instances with Individual Speed and Placement */
-        .c1 { top: 10%; animation-duration: 35s; transform: scale(0.6); }
-        .c2 { top: 35%; animation-duration: 55s; transform: scale(1.1); animation-delay: -10s; }
-        .c3 { top: 60%; animation-duration: 42s; transform: scale(0.8); animation-delay: -25s; }
-        .c4 { top: 20%; animation-duration: 70s; transform: scale(1.4); animation-delay: -40s; }
-        .c5 { top: 75%; animation-duration: 48s; transform: scale(0.5); animation-delay: -5s; }
-
-        /* Floating Animation Matrix */
-        @keyframes float {
+        /* Multi-layered Realistic Animation Loop */
+        @keyframes drift {
             0% {
-                left: -350px;
+                transform: translateX(-600px) translateZ(var(--z)) scale(var(--scale));
+                opacity: 0;
+            }
+            10% {
+                opacity: var(--max-opacity);
+            }
+            90% {
+                opacity: var(--max-opacity);
             }
             100% {
-                left: 100%;
+                transform: translateX(105vw) translateZ(var(--z)) scale(var(--scale));
+                opacity: 0;
             }
         }
 
-        /* Foreground Content */
-        .main-content {
-            position: relative;
+        /* Cinematic Atmospheric Lighting Overlay */
+        .sky-glow {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: radial-gradient(circle at 50% 120%, rgba(255, 210, 160, 0.4) 0%, rgba(255, 160, 120, 0.15) 40%, rgba(0,0,0,0) 100%);
             z-index: 2;
-            min-height: 100vh;
+            pointer-events: none;
+            mix-blend-mode: color-dodge;
+        }
+
+        /* Premium Front Content Interface */
+        .interface {
+            position: relative;
+            z-index: 10;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            height: 100vh;
+            color: #ffffff;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
+            background: radial-gradient(circle at center, rgba(17, 30, 54, 0.2) 0%, rgba(17, 30, 54, 0.5) 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 50px 60px;
+            border-radius: 24px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            max-width: 650px;
+            transform: translateY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
         }
 
         h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            letter-spacing: -1px;
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            background: linear-gradient(45deg, #ffffff, #c2ccff);
+            background: linear-gradient(to bottom, #ffffff 40%, #dbe7f5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            color: #d1d5db;
-        }
-
-        .cta-btn {
-            padding: 14px 32px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1a1c2e;
-            background: #ffffff;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.25);
+            font-size: 1.1rem;
+            color: #b0c4de;
+            line-height: 1.8;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating Clouds Layer -->
-    <div class="sky-container">
-        <div class="cloud cloud-style-1 c1"></div>
-        <div class="cloud cloud-style-2 c2"></div>
-        <div class="cloud cloud-style-1 c3"></div>
-        <div class="cloud cloud-style-2 c4"></div>
-        <div class="cloud cloud-style-1 c5"></div>
+    <!-- 3D Sky Environment -->
+    <div class="sky-viewport">
+        <div class="sky-glow"></div>
+        <div class="cloud-world">
+            
+            <!-- Cloud 1: Foreground and Fast -->
+            <div class="cloud-group" style="--top: 15%; --speed: 38s; --delay: 0s; --z: 80px; --scale: 1.3; --max-opacity: 0.85;">
+                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div><div class="puff puff-5"></div>
+            </div>
+
+            <!-- Cloud 2: Deep Background and Slow -->
+            <div class="cloud-group" style="--top: 5%; --speed: 75s; --delay: -20s; --z: -120px; --scale: 0.8; --max-opacity: 0.4;">
+                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div>
+            </div>
+
+            <!-- Cloud 3: Midground Standard -->
+            <div class="cloud-group" style="--top: 38%; --speed: 52s; --delay: -10s; --z: -20px; --scale: 1.0; --max-opacity: 0.65;">
+                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div><div class="puff puff-5"></div>
+            </div>
+
+            <!-- Cloud 4: Low Horizon Midground -->
+            <div class="cloud-group" style="--top: 55%; --speed: 60s; --delay: -35s; --z: 10px; --scale: 1.1; --max-opacity: 0.6;">
+                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div>
+            </div>
+
+        </div>
     </div>
 
-    <!-- Website Core Content -->
-    <main class="main-content">
-        <h1>Drift Away</h1>
-        <p>Welcome to a sleek, modern interface styled with beautiful CSS-only glassmorphism clouds drifting seamlessly across a twilight sky matrix.</p>
-        <button class="cta-btn">Explore More</button>
+    <!-- Neat Ultra-Modern User Interface -->
+    <main class="interface">
+        <div class="glass-card">
+            <h1>Atmosphere</h1>
+            <p>Experience true volumetric realism built completely within CSS. Individual overlapping vapor puffs move across an interactive 3D depth axis with natural sun glares and linear scatter physics.</p>
+        </div>
     </main>
 
 </body>
