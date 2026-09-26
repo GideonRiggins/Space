@@ -291,6 +291,38 @@
         <div class="scroll-indicator" onclick="document.getElementById('explore').scrollIntoView();">▼ Scroll</div>
     </section>
 <!-- =======================================================================
+     SECTION 2: THE ENGAGEMENT LOOP ENGINE (LIVE GRID & DOPAMINE BOX)
+     ======================================================================= -->
+    <section class="loop-section" id="explore">
+        <h2 class="section-header">Live Engagement Matrix</h2>
+        <div class="matrix-grid">
+            <div class="interactive-card" onclick="triggerIncrement(this, 'clicks')">
+                <div class="counter-display" id="click-count">0</div>
+                <h3 class="card-title">Interactions Built</h3>
+                <p class="card-desc">Click this card to trigger micro-feedback updates and expand your localized session depth.</p>
+            </div>
+            <div class="interactive-card">
+                <div class="counter-display" id="time-count">0s</div>
+                <h3 class="card-title">Focus Duration</h3>
+                <p class="card-desc">Tracks the precise duration of uninterrupted cognitive investment within this zone.</p>
+            </div>
+            <div class="interactive-card" onclick="triggerIncrement(this, 'energy')">
+                <div class="counter-display" id="energy-level">100%</div>
+                <h3 class="card-title">System Synergy</h3>
+                <p class="card-desc">Dynamic efficiency rating computed continuously based on your behavioral inputs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="rush-section">
+        <div class="reward-box" id="rewardBox">
+            <div class="level-badge" id="rankBadge">Tier 1: Novice</div>
+            <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 15px;">Dopamine Amplification</h2>
+            <p style="color: #8a99ad; font-size: 1.1rem;">Pressing the core matrix stabilization node simulates instant user reward validation mechanisms. Overclock the link.</p>
+            <button class="dopamine-btn" onclick="triggerFlash()">Stabilize Node</button>
+        </div>
+    </section>
+<!-- =======================================================================
      SECTION 3: THE ENGINE LOGIC & CANVAS FLUID INTERACTION SCRIPT
      ======================================================================= -->
     <script>
