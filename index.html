@@ -3,191 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realistic Floating Clouds</title>
+    <title>Interactive Photorealistic Sky Matrix</title>
     <style>
-        /* Base Setup */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(to bottom, #111e36 0%, #1f3b68 40%, #4a75a0 85%, #8baec6 100%);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: radial-gradient(circle at 50% 100%, #1e3c72 0%, #111e36 60%, #070b12 100%);
         }
 
-        /* 3D Viewport Setup */
         .sky-viewport {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            perspective: 400px;
+            perspective: 800px;
             perspective-origin: 50% 50%;
+            overflow: hidden;
             z-index: 1;
         }
 
-        .cloud-world {
+        .sky-lighting {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: 
+                radial-gradient(circle at 50% 30%, rgba(135, 206, 250, 0.15) 0%, rgba(0,0,0,0) 50%),
+                radial-gradient(circle at 10% 20%, rgba(255, 138, 138, 0.08) 0%, rgba(0,0,0,0) 40%);
+            mix-blend-mode: screen;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .starfield {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
+            background-size: 550px 550px, 350px 350px;
+            background-position: 0 0, 40px 60px;
+            opacity: 0.4;
+            transform: rotate(-15deg);
+            animation: cosmicShift 180s linear infinite;
+        }
+
+        .cloud-system {
             position: absolute;
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
+            will-change: transform;
         }
 
-        /* Highly Realistic CSS Cloud Layering */
-        .cloud-group {
+        .cloud-formation {
             position: absolute;
-            width: 500px;
-            height: 250px;
+            width: 650px;
+            height: 300px;
             top: var(--top);
             transform-style: preserve-3d;
-            animation: drift var(--speed) linear infinite;
+            animation: grandDrift var(--speed) linear infinite;
             animation-delay: var(--delay);
             opacity: 0;
+            will-change: transform, opacity;
         }
 
-        /* Individual realistic puff layers using gradients & blur */
-        .puff {
+        .vapor-node {
             position: absolute;
-            background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.85) 0%, rgba(240, 245, 255, 0.6) 30%, rgba(180, 200, 220, 0.2) 70%, rgba(0, 0, 0, 0) 100%);
+            background: radial-gradient(circle at var(--px) var(--py), 
+                rgba(255, 255, 255, 0.88) 0%, 
+                rgba(242, 246, 253, 0.75) 20%, 
+                rgba(174, 195, 222, 0.35) 55%, 
+                rgba(30, 50, 85, 0.0) 75%);
             border-radius: 50%;
-            filter: blur(25px);
-            mix-blend-mode: screen;
+            filter: blur(40px);
+            mix-blend-mode: color-dodge;
+            width: var(--size);
+            height: var(--size);
+            top: var(--y);
+            left: var(--x);
+            transform: translateZ(var(--z));
         }
 
-        /* Cloud Structural Variations */
-        .puff-1 { width: 320px; height: 180px; top: 20px; left: 40px; transform: translateZ(20px); }
-        .puff-2 { width: 260px; height: 220px; top: -30px; left: 160px; transform: translateZ(-10px) scale(1.1); }
-        .puff-3 { width: 220px; height: 140px; top: 60px; left: 240px; transform: translateZ(40px); }
-        .puff-4 { width: 340px; height: 160px; top: -10px; left: -20px; transform: translateZ(-30px); }
-        .puff-5 { width: 180px; height: 120px; top: 80px; left: 100px; transform: translateZ(10px); }
+        .vapor-shadow {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(10, 18, 36, 0.45) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            mix-blend-mode: multiply;
+            width: calc(var(--size) * 1.2);
+            height: calc(var(--size) * 0.9);
+            top: calc(var(--y) + 30px);
+            left: calc(var(--x) - 10px);
+            transform: translateZ(calc(var(--z) - 10px));
+            opacity: 0.8;
+        }
 
-        /* Multi-layered Realistic Animation Loop */
-        @keyframes drift {
+        @keyframes grandDrift {
             0% {
-                transform: translateX(-600px) translateZ(var(--z)) scale(var(--scale));
+                transform: translateX(-750px) translateZ(var(--z)) scale(var(--scale));
                 opacity: 0;
             }
-            10% {
-                opacity: var(--max-opacity);
-            }
-            90% {
-                opacity: var(--max-opacity);
-            }
+            8% { opacity: var(--max-op); }
+            90% { opacity: var(--max-op); }
             100% {
                 transform: translateX(105vw) translateZ(var(--z)) scale(var(--scale));
                 opacity: 0;
             }
         }
 
-        /* Cinematic Atmospheric Lighting Overlay */
-        .sky-glow {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: radial-gradient(circle at 50% 120%, rgba(255, 210, 160, 0.4) 0%, rgba(255, 160, 120, 0.15) 40%, rgba(0,0,0,0) 100%);
-            z-index: 2;
-            pointer-events: none;
-            mix-blend-mode: color-dodge;
+        @keyframes cosmicShift {
+            0% { transform: rotate(-15deg) translate(0, 0); }
+            100% { transform: rotate(-15deg) translate(-100px, 50px); }
         }
 
-        /* Premium Front Content Interface */
-        .interface {
+        .overlay-ui {
             position: relative;
             z-index: 10;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             width: 100%;
             height: 100vh;
-            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            pointer-events: none;
+        }
+
+        .central-console {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 60px 50px;
+            border-radius: 32px;
             text-align: center;
-            padding: 30px;
-            background: radial-gradient(circle at center, rgba(17, 30, 54, 0.2) 0%, rgba(17, 30, 54, 0.5) 100%);
+            max-width: 600px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), inset 0 1px 3px rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: auto;
+            cursor: pointer;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 50px 60px;
-            border-radius: 24px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            max-width: 650px;
-            transform: translateY(0);
-            transition: transform 0.4s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
+        .central-console:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), inset 0 1px 5px rgba(255, 255, 255, 0.2);
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 4px;
+            color: #ffffff;
+            font-size: 2.8rem;
+            font-weight: 200;
+            letter-spacing: 12px;
             text-transform: uppercase;
-            margin-bottom: 20px;
-            background: linear-gradient(to bottom, #ffffff 40%, #dbe7f5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
         }
 
         p {
-            font-size: 1.1rem;
-            color: #b0c4de;
+            color: #9cb3d0;
+            font-size: 1rem;
             line-height: 1.8;
+            letter-spacing: 1px;
             font-weight: 300;
-            letter-spacing: 0.5px;
+            margin-bottom: 35px;
         }
+
+        .action-node {
+            display: inline-block;
+            padding: 14px 36px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .action-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .action-node:hover {
+            background: #ffffff;
+            color: #070b12;
+            border-color: #ffffff;
+            box-shadow: 0 0 25px rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .action-node:hover::before { left: 100%; }
     </style>
 </head>
 <body>
-
-    <!-- 3D Sky Environment -->
-    <div class="sky-viewport">
-        <div class="sky-glow"></div>
-        <div class="cloud-world">
-            
-            <!-- Cloud 1: Foreground and Fast -->
-            <div class="cloud-group" style="--top: 15%; --speed: 38s; --delay: 0s; --z: 80px; --scale: 1.3; --max-opacity: 0.85;">
-                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div><div class="puff puff-5"></div>
+    <div class="sky-viewport" id="viewport">
+        <div class="sky-lighting"></div>
+        <div class="starfield"></div>
+        
+        <div class="cloud-system" id="cloudSystem">
+            <!-- Cloud Formation 1: Foreground Giant -->
+            <div class="cloud-formation" style="--top: 10%; --speed: 40s; --delay: -5s; --z: 180px; --scale: 1.4; --max-op: 0.95;">
+                <div class="vapor-shadow" style="--size:320px; --x:20px; --y:40px; --z:180px;"></div>
+                <div class="vapor-node" style="--size:320px; --x:20px; --y:40px; --z:180px; --px:35%; --py:35%;"></div>
+                <div class="vapor-shadow" style="--size:280px; --x:180px; --y:10px; --z:160px;"></div>
+                <div class="vapor-node" style="--size:280px; --x:180px; --y:10px; --z:160px; --px:45%; --py:25%;"></div>
+                <div class="vapor-node" style="--size:240px; --x:340px; --y:60px; --z:190px; --px:30%; --py:40%;"></div>
             </div>
 
-            <!-- Cloud 2: Deep Background and Slow -->
-            <div class="cloud-group" style="--top: 5%; --speed: 75s; --delay: -20s; --z: -120px; --scale: 0.8; --max-opacity: 0.4;">
-                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div>
+            <!-- Cloud Formation 2: Deep Ambient Horizon -->
+            <div class="cloud-formation" style="--top: -5%; --speed: 95s; --delay: -45s; --z: -250px; --scale: 0.7; --max-op: 0.45;">
+                <div class="vapor-node" style="--size:400px; --x:40px; --y:10px; --z:-250px; --px:50%; --py:50%;"></div>
+                <div class="vapor-node" style="--size:350px; --x:260px; --y:-30px; --z:-270px; --px:40%; --py:40%;"></div>
             </div>
 
-            <!-- Cloud 3: Midground Standard -->
-            <div class="cloud-group" style="--top: 38%; --speed: 52s; --delay: -10s; --z: -20px; --scale: 1.0; --max-opacity: 0.65;">
-                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div><div class="puff puff-5"></div>
+            <!-- Cloud Formation 3: Midground Standard -->
+            <div class="cloud-formation" style="--top: 35%; --speed: 62s; --delay: -18s; --z: 20px; --scale: 1.0; --max-op: 0.8;">
+                <div class="vapor-shadow" style="--size:260px; --x:50px; --y:50px; --z:20px;"></div>
+                <div class="vapor-node" style="--size:260px; --x:50px; --y:50px; --z:20px; --px:30%; --py:30%;"></div>
+                <div class="vapor-shadow" style="--size:310px; --x:160px; --y:15px; --z:40px;"></div>
+                <div class="vapor-node" style="--size:310px; --x:160px; --y:15px; --z:40px; --px:45%; --py:35%;"></div>
+                <div class="vapor-shadow" style="--size:220px; --x:360px; --y:70px; --z:10px;"></div>
+                <div class="vapor-node" style="--size:220px; --x:360px; --y:70px; --z:10px; --px:50%; --py:50%;"></div>
             </div>
 
-            <!-- Cloud 4: Low Horizon Midground -->
-            <div class="cloud-group" style="--top: 55%; --speed: 60s; --delay: -35s; --z: 10px; --scale: 1.1; --max-opacity: 0.6;">
-                <div class="puff puff-1"></div><div class="puff puff-2"></div><div class="puff puff-3"></div><div class="puff puff-4"></div>
+            <!-- Cloud Formation 4: Low Midground Track -->
+            <div class="cloud-formation" style="--top: 60%; --speed: 78s; --delay: -55s; --z: -60px; --scale: 1.15; --max-op: 0.75;">
+                <div class="vapor-shadow" style="--size:290px; --x:30px; --y:30px; --z:-60px;"></div>
+                <div class="vapor-node" style="--size:290px; --x:30px; --y:30px; --z:-60px; --px:40%; --py:30%;"></div>
+                <div class="vapor-shadow" style="--size:340px; --x:180px; --y:40px; --z:-40px;"></div>
+                <div class="vapor-node" style="--size:340px; --x:180px; --y:40px; --z:-40px; --px:50%; --py:50%;"></div>
             </div>
-
         </div>
     </div>
 
-    <!-- Neat Ultra-Modern User Interface -->
-    <main class="interface">
-        <div class="glass-card">
-            <h1>Atmosphere</h1>
-            <p>Experience true volumetric realism built completely within CSS. Individual overlapping vapor puffs move across an interactive 3D depth axis with natural sun glares and linear scatter physics.</p>
+    <main class="overlay-ui">
+        <div class="central-console" id="interactiveCard">
+            <h1>Nirvana</h1>
+            <p>A precision-coded sky rendering engine leveraging internal volumetric dark shadows, light scatter ray simulations, and mouse-bound physical parallax parameters.</p>
+            <div class="action-node">Initialize Engine</div>
         </div>
     </main>
 
+    <script>
+        const viewport = document.getElementById('viewport');
+        const cloudSystem = document.getElementById('cloudSystem');
+        const interactiveCard = document.getElementById('interactiveCard');
+
+        window.addEventListener('mousemove', (e) => {
+            const mouseX = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+            const mouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+
+            cloudSystem.style.transform = `translateX(${mouseX * 45}px) translateY(${mouseY * 25}px)`;
+            
+            const cardRotateX = mouseY * -15; 
+            const cardRotateY = mouseX * 15;  
+            interactiveCard.style.transform = `rotateX(${cardRotateX}deg) rotateY(${cardRotateY}deg) translateZ(30px)`;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            cloudSystem.style.transform = `translateX(0px) translateY(0px)`;
+            interactiveCard.style.transform = `rotateX(0deg) rotateY(0deg) translateZ(0px)`;
+        });
+    </script>
 </body>
 </html>
